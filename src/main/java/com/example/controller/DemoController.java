@@ -35,12 +35,4 @@ public class DemoController {
         return user;
     }
 
-    @RequestMapping(value = "/*")
-    public String helloWorld(ModelMap modelMap){
-        //向模板中添加属性
-        modelMap.put("hello","欢迎访问本网站");
-        // return模板文件的名称，对应src/main/resources/templates/index.html
-        return "index";
-    }
-
 }
