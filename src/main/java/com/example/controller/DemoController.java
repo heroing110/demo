@@ -19,15 +19,7 @@ public class DemoController {
     @Autowired
     private BookService bookService;
 
-    @RequestMapping(value = "/helloWorld")
-    public String helloWorld(ModelMap modelMap){
-        //向模板中添加属性
-        modelMap.put("hello","HelloWorld");
-        // return模板文件的名称，对应src/main/resources/templates/index.html
-        return "index";
-    }
-
-    @RequestMapping(value = "/getBookCount")
+    @RequestMapping(value = "/getBookCount.shtml")
     public String getBookCount(ModelMap modelMap){
         int bookcount = bookService.getBookCount();
         modelMap.put("bookcount",bookcount);
@@ -35,12 +27,20 @@ public class DemoController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/getUser")
+    @RequestMapping(value = "/getUser.shtml")
     public User getUser(){
         User user = new User();
         user.setAge("12");
         user.setName("小明");
         return user;
+    }
+
+    @RequestMapping(value = "/*")
+    public String helloWorld(ModelMap modelMap){
+        //向模板中添加属性
+        modelMap.put("hello","欢迎访问本网站");
+        // return模板文件的名称，对应src/main/resources/templates/index.html
+        return "index";
     }
 
 }
