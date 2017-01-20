@@ -1,7 +1,6 @@
 package com.example.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -14,6 +13,5 @@ public class BookDao {
     private JdbcTemplate jdbcTemplate;
 
     public void test(){
-
     }
 }

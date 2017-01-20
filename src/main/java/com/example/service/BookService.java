@@ -1,5 +1,9 @@
 package com.example.service;
 
+import com.example.bean.Book;
+
+import java.util.List;
+
 /**
  * Created by lenovo on 2017/1/11.
  */
@@ -27,4 +31,6 @@ public interface BookService {
      * 删除所有数据
      */
     void deleteAll();
+
+    List<Book> findBooksByNameLike(String name);
 }
