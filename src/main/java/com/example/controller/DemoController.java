@@ -5,6 +5,7 @@ import com.example.bean.User;
 import com.example.service.BookService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -39,10 +40,11 @@ public class DemoController {
     }
 
     @ApiOperation(value="获取图书列表", notes="获取图书列表")
-    @ApiImplicitParam(name = "name", value = "图书名称", required = false, dataType = "String")
+    @ApiImplicitParam(name = "name", value = "图书名称", required = false, dataType = "String",paramType = "query")
     @ResponseBody
-    @RequestMapping(value = "/{name}",method = RequestMethod.GET)
-    public List<Book> getBookList(@PathVariable String name){
+    @RequestMapping(value = "/getBookList",method = RequestMethod.GET)
+    public List<Book> getBookList(String name){
+        System.out.println("----------name:"+name);
         return bookService.findBooksByNameLike(name);
     }
 
