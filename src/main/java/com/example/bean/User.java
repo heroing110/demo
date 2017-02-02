@@ -1,34 +1,77 @@
 package com.example.bean;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 /**
  * Created by lenovo on 2017/1/16.
  */
+@Entity
 public class User {
-    public String id;
-    public String name;
-    public String age;
+    @Id
+    @GeneratedValue
+    private Long id;
+    @Column(nullable = false)
+    private String username;
+    @Column(nullable = false)
+    private String password;
+    @Column(nullable = false)
+    private String cityid;
+    @Column(nullable = false)
+    private String permission;
+    @Column(nullable = false)
+    private String usernamecn;
 
-    public String getId() {
+    public User() {
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getAge() {
-        return age;
+    public String getPassword() {
+        return password;
     }
 
-    public void setAge(String age) {
-        this.age = age;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getCityid() {
+        return cityid;
+    }
+
+    public void setCityid(String cityid) {
+        this.cityid = cityid;
+    }
+
+    public String getPermission() {
+        return permission;
+    }
+
+    public void setPermission(String permission) {
+        this.permission = permission;
+    }
+
+    public String getUsernamecn() {
+        return usernamecn;
+    }
+
+    public void setUsernamecn(String usernamecn) {
+        this.usernamecn = usernamecn;
     }
 }

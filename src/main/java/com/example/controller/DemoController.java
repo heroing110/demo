@@ -1,15 +1,15 @@
 package com.example.controller;
 
 import com.example.bean.Book;
-import com.example.bean.User;
 import com.example.service.BookService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -29,20 +29,10 @@ public class DemoController {
         return "book";
     }
 
-    @ApiOperation(value="获取用户对象测试", notes="")
-    @ResponseBody
-    @RequestMapping(value = "/getUser.shtml",method = RequestMethod.GET)
-    public User getUser(){
-        User user = new User();
-        user.setAge("12");
-        user.setName("小明");
-        return user;
-    }
-
     @ApiOperation(value="获取图书列表", notes="获取图书列表")
     @ApiImplicitParam(name = "name", value = "图书名称", required = false, dataType = "String",paramType = "query")
     @ResponseBody
-    @RequestMapping(value = "/getBookList",method = RequestMethod.GET)
+    @RequestMapping(value = "/getBookList")
     public List<Book> getBookList(String name){
         System.out.println("----------name:"+name);
         return bookService.findBooksByNameLike(name);

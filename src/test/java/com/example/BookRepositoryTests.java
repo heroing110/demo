@@ -3,7 +3,6 @@ package com.example;
 import com.example.bean.Book;
 import com.example.bean.BookChild;
 import com.example.dao.BookRepository;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -30,8 +28,8 @@ public class BookRepositoryTests {
 
     @Test
     public void test() throws Exception {
-        bookRepository.save(new Book("book1",1,new String[]{"1","2"},new BookChild("child1")));
-        bookRepository.save(new Book("book2",2,new String[]{"1","2"},new BookChild("child1")));
+        bookRepository.save(new Book("book1",1,new String[]{"1","2"},new BookChild(1)));
+        bookRepository.save(new Book("book2",2,new String[]{"1","2"},new BookChild(2)));
 //        bookRepository.save(new Book("book2",2));
 //        bookRepository.save(new Book("book3",3));
 //        bookRepository.save(new Book("book4",4));

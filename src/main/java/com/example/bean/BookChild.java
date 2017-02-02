@@ -14,13 +14,13 @@ public class BookChild {
     @GeneratedValue
     private Long id;
     @Column(nullable = false)
-    private String name;
+    private Integer age;
 
     public BookChild() {
     }
 
-    public BookChild(String name) {
-        this.name = name;
+    public BookChild(Integer age) {
+        this.age = age;
     }
 
     public Long getId() {
@@ -31,11 +31,11 @@ public class BookChild {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public Integer getAge() {
+        return age;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setAge(Integer age) {
+        this.age = age;
     }
 }
