@@ -20,7 +20,7 @@ public class YearController {
     private YearService yearService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public Object queryAll(String cityId,String userId) {
+    public Object queryAll(String cityId,String userId,String permission) {
         Map<String, Object> resutMap = Maps.newHashMap();
         resutMap.put("status", 1);
         resutMap.put("message", "YearController:queryAll异常");
