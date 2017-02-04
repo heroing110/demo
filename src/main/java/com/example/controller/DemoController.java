@@ -1,22 +1,21 @@
 package com.example.controller;
 
 import com.example.bean.Book;
+import com.example.bean.User;
 import com.example.service.BookService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 /**
  * Created by heroing110 on 2017-01-10.
  */
-@Controller
+@RestController
 @RequestMapping(value = "/demo")
 public class DemoController {
     @Autowired
@@ -36,6 +35,14 @@ public class DemoController {
     public List<Book> getBookList(String name){
         System.out.println("----------name:"+name);
         return bookService.findBooksByNameLike(name);
+    }
+
+    @ApiOperation(value="updateinfo", notes="updateinfo")
+    @ApiImplicitParam(name = "list", value = "UserList", required = true)
+    @RequestMapping(value="/updateinfo",method = RequestMethod.POST)
+    public Object updateinfo(@RequestBody List<User> list) {
+        System.out.println("updateinfo-------------------list:"+list);
+        return list;
     }
 
 }

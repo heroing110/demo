@@ -83,7 +83,8 @@ public class Season {
     @Column private String companyName;
     @Column private String year;
     @Column private String season;
-    @Column private String userid;
+    @Column private Long user_id;
+    @Column private String cityid;
 
     public Long getId() {
         return id;
@@ -653,11 +654,19 @@ public class Season {
         this.season = season;
     }
 
-    public String getUserid() {
-        return userid;
+    public Long getUser_id() {
+        return user_id;
     }
 
-    public void setUserid(String userid) {
-        this.userid = userid;
+    public void setUser_id(Long user_id) {
+        this.user_id = user_id;
+    }
+
+    public String getCityid() {
+        return cityid;
+    }
+
+    public void setCityid(String cityid) {
+        this.cityid = cityid;
     }
 }
