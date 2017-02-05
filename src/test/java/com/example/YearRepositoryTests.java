@@ -27,23 +27,6 @@ public class YearRepositoryTests {
     @Test
     public void test() throws Exception {
         Year year = yearService.findYearById(new Long(1));
-        System.out.println("year.id:"+year.getId());
-    }
-
-    @Test
-    public void test2() throws Exception {
-        Year year = new Year();
-        year.setCell11("1");
-        Year result_year = yearService.saveYear(year);
-        System.out.println("year.id:"+result_year.getId());
-    }
-
-    @Test
-    public void test3() throws Exception {
-        Year year = new Year();
-        year.setId(new Long(3));
-        year.setCell11("2");
-        Year result_year = yearService.saveYear(year);
-        System.out.println("year.id:"+result_year.getId());
+        System.out.println("year.id:" + year.getId());
     }
 }
