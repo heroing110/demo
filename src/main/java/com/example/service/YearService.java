@@ -9,9 +9,9 @@ import java.util.List;
  */
 public interface YearService {
 
-    public List<Year> findByCondition(String cityid, String userid);
+    public List<Year> findByCondition(String cityId, String userId, String permission,String companyName);
 
     public Year findYearById(Long id);
 
-    public Year saveYear(Year year);
+    public Object saveYear(Year year);
 }

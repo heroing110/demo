@@ -3,6 +3,7 @@ package com.example.service.impl;
 import com.example.bean.Year;
 import com.example.dao.YearRepository;
 import com.example.service.YearService;
+import com.google.common.collect.Maps;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by heying on 2017/2/1 0001.
@@ -24,19 +26,27 @@ public class YearServiceImpl implements YearService {
     @Autowired
     private YearRepository yearRepository;
 
-    public List<Year> findByCondition(String cityid,String userid){
+    public List<Year> findByCondition(String cityid, String userid, String permission,String companyName){
         List<Year> resultList = null;
         Specification querySpecifi = new Specification<Year>() {
             @Override
             public Predicate toPredicate(Root<Year> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
 
                 List<Predicate> predicates = new ArrayList<>();
+                if(null != permission){
+                    predicates.add(criteriaBuilder.equal(root.get("permission"), permission));
+                }else{
+                    if(null != userid){
+                        predicates.add(criteriaBuilder.equal(root.get("user_id"), userid));
+                    }
+                }
                 if(null != cityid){
                     predicates.add(criteriaBuilder.equal(root.get("cityid"), cityid));
                 }
-                if(null != userid){
-                    predicates.add(criteriaBuilder.equal(root.get("user_id"), userid));
+                if(null != companyName){
+                    predicates.add(criteriaBuilder.like(root.get("company_name"), "%"+companyName+"%"));
                 }
+
                 return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
             }
         };
@@ -50,7 +60,24 @@ public class YearServiceImpl implements YearService {
     }
 
     @Override
-    public Year saveYear(Year year) {
-        return yearRepository.save(year);
+    public Object saveYear(Year year) {
+        Map<String,Object> resultMap = Maps.newHashMap();
+        if(null!=year.getId()){
+            Year resultYear = yearRepository.getOne(year.getId());
+            if(resultYear!=null){
+                resultMap.put("exist",true);
+                resultMap.put("inserted",false);
+            }else{
+                Year newYear = yearRepository.save(year);
+                if(newYear.getId()!=null){
+                    resultMap.put("exist",false);
+                    resultMap.put("inserted",true);
+                }
+            }
+        }else{
+            yearRepository.save(year);
+            resultMap.put("updated",true);
+        }
+        return resultMap;
     }
 }

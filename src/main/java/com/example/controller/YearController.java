@@ -20,13 +20,13 @@ public class YearController {
     private YearService yearService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public Object queryAll(String cityId,String userId,String permission) {
+    public Object queryAll(String cityId,String userId,String permission,String companyName) {
         Map<String, Object> resutMap = Maps.newHashMap();
         resutMap.put("status", 1);
         resutMap.put("message", "YearController:queryAll异常");
 
         try {
-            return yearService.findByCondition(cityId,userId);
+            return yearService.findByCondition(cityId,userId,permission,companyName);
         } catch (Exception e) {
             e.printStackTrace();
             return resutMap;
