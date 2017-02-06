@@ -176,6 +176,7 @@ public class Year {
     private String r_cell105;
     @Column
     private String cityid;
+    @Column private String permission;
 
     public Long getId() {
         return id;
@@ -848,5 +849,13 @@ public class Year {
 
     public void setUser_id(Long user_id) {
         this.user_id = user_id;
+    }
+
+    public String getPermission() {
+        return permission;
+    }
+
+    public void setPermission(String permission) {
+        this.permission = permission;
     }
 }
