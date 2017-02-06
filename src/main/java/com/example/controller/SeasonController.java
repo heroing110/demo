@@ -1,7 +1,7 @@
 package com.example.controller;
 
-import com.example.bean.Year;
-import com.example.service.YearService;
+import com.example.bean.Season;
+import com.example.service.SeasonService;
 import com.google.common.collect.Maps;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,16 +17,16 @@ import java.util.Map;
 @RequestMapping(value = "/api/season")
 public class SeasonController {
     @Autowired
-    private YearService yearService;
+    private SeasonService seasonService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public Object queryAll(String cityId,String userId,String permission) {
+    public Object queryAll(String cityId,String userId,String permission,String companyName) {
         Map<String, Object> resutMap = Maps.newHashMap();
         resutMap.put("status", 1);
         resutMap.put("message", "YearController:queryAll异常");
 
         try {
-            return yearService.findByCondition(cityId,userId);
+            return seasonService.findByCondition(cityId,userId,permission,companyName);
         } catch (Exception e) {
             e.printStackTrace();
             return resutMap;
@@ -35,21 +35,21 @@ public class SeasonController {
 
     // GET path = '/detail'
     @RequestMapping(value = "/detail",method = RequestMethod.GET)
-    public Object queryDetail(String yearId){
-        return yearService.findYearById(Long.parseLong(yearId));
+    public Object queryDetail(String seasonId){
+        return seasonService.findSeasonById(Long.parseLong(seasonId));
     }
 
     // POST path = '/insert'
     @RequestMapping(value = "/insert",method = RequestMethod.POST)
-    public Object insert(Year year){
-        return yearService.saveYear(year);
+    public Object insert(Season season){
+        return seasonService.saveSeason(season);
     }
 
 
-    // PUT path = '/update', params='yearId'
+    // PUT path = '/update'
     @RequestMapping(value = "/update",method = RequestMethod.PUT)
-    public Object update(Year year){
-        return yearService.saveYear(year);
+    public Object update(Season season){
+        return seasonService.saveSeason(season);
     }
 
 }

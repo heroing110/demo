@@ -1,7 +1,6 @@
 package com.example.service;
 
 import com.example.bean.Season;
-import com.example.bean.Year;
 
 import java.util.List;
 
@@ -10,9 +9,9 @@ import java.util.List;
  */
 public interface SeasonService {
 
-    public List<Season> findByCondition(String cityid, String userid);
+    public List<Season> findByCondition(String cityId, String userId, String permission, String companyName);
 
     public Season findSeasonById(Long id);
 
-    public Season saveSeason(Season season);
+    public Object saveSeason(Season season);
 }
