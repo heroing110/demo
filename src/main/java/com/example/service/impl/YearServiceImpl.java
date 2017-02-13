@@ -62,8 +62,8 @@ public class YearServiceImpl implements YearService {
     @Override
     public Object saveYear(Year year) {
         Map<String,Object> resultMap = Maps.newHashMap();
-        if(null!=year.getId()){
-            Year resultYear = yearRepository.getOne(year.getId());
+        if(null==year.getId()){
+            Year resultYear = yearRepository.findYearByYear(year.getYear());
             if(resultYear!=null){
                 resultMap.put("exist",true);
                 resultMap.put("inserted",false);

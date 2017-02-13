@@ -34,4 +34,42 @@ public class UsersController {
     }
 
 
+    @RequestMapping(value = "queryAll",method = RequestMethod.GET)
+    public Object queryAll(String usernamecn, String permission) {
+        Map<String, Object> resutMap = Maps.newHashMap();
+        resutMap.put("status", 1);
+        resutMap.put("message", "UsersController:queryAll异常");
+
+        try {
+            return usersService.findByCondition(usernamecn,permission);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return resutMap;
+        }
+    }
+
+    @RequestMapping(value = "delete",method = RequestMethod.DELETE)
+    public Object delete(String userId) {
+        Map<String,Object> resultMap = Maps.newHashMap();
+        resultMap.put("removed",false);
+        try {
+            Long id = Long.parseLong(userId);
+            return  usersService.deleteUser(id);
+        } catch (Exception e) {
+            resultMap.put("message","UsersController:delete异常");
+            e.printStackTrace();
+        }
+
+        return resultMap;
+    }
+
+    @RequestMapping(value = "insert",method = RequestMethod.PUT)
+    public Object insert(@RequestBody User user) {
+        return usersService.saveUser(user);
+    }
+
+    @RequestMapping(value = "update",method = RequestMethod.POST)
+    public Object update(@RequestBody User user) {
+        return usersService.saveUser(user);
+    }
 }

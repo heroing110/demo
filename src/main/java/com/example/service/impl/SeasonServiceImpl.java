@@ -62,8 +62,8 @@ public class SeasonServiceImpl implements SeasonService {
     @Override
     public Object saveSeason(Season season) {
         Map<String,Object> resultMap = Maps.newHashMap();
-        if(null!=season.getId()){
-            Season resultSeason = seasonRepository.getOne(season.getId());
+        if(null==season.getId()){
+            Season resultSeason = seasonRepository.findSeasonByYearAndSeason(season.getYear(),season.getSeason());
             if(resultSeason!=null){
                 resultMap.put("exist",true);
                 resultMap.put("inserted",false);

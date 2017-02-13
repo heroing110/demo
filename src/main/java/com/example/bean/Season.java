@@ -83,7 +83,7 @@ public class Season {
     @Column private String companyName;
     @Column private String year;
     @Column private String season;
-    @Column private Long user_id;
+    @Column private Long userId;
     @Column private String permission;
 
     public Long getId() {
@@ -654,12 +654,12 @@ public class Season {
         this.season = season;
     }
 
-    public Long getUser_id() {
-        return user_id;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser_id(Long user_id) {
-        this.user_id = user_id;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getPermission() {

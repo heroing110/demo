@@ -9,4 +9,8 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
  */
 public interface YearRepository extends JpaRepository<Year,Long>,JpaSpecificationExecutor {
     public Year findYearById(Long id);
+
+    public Year findYearByUserId(Long user_id);
+
+    public Year findYearByYear(String year);
 }

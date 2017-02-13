@@ -12,4 +12,10 @@ public interface UsersService {
     List<User> findBooksByUsernameLike(String name);
 
     public Map<String,Object> findUsersByUsernameAndPassword(User users) throws Exception;
+
+    public List<User> findByCondition(String usernamecn, String permission);
+
+    public Map<String,Object> deleteUser(Long id);
+
+    public Object saveUser(User user);
 }

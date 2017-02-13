@@ -9,4 +9,8 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
  */
 public interface SeasonRepository extends JpaRepository<Season,Long>,JpaSpecificationExecutor {
     public Season findSeasonById(Long id);
+
+    public Season findSeasonByUserId(Long user_id);
+
+    public Season findSeasonByYearAndSeason(String year,String season);
 }
