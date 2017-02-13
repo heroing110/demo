@@ -63,20 +63,21 @@ public class YearServiceImpl implements YearService {
     public Object saveYear(Year year) {
         Map<String,Object> resultMap = Maps.newHashMap();
         if(null==year.getId()){
-            Year resultYear = yearRepository.findYearByYear(year.getYear());
+            Year resultYear = yearRepository.findYearByYearAndUserId(year.getYear(),year.getUserId());
             if(resultYear!=null){
-                resultMap.put("exist",true);
+                resultMap.put("message","已存在本年度数据");
                 resultMap.put("inserted",false);
             }else{
                 Year newYear = yearRepository.save(year);
                 if(newYear.getId()!=null){
-                    resultMap.put("exist",false);
+                    resultMap.put("message","新增年度报表成功");
                     resultMap.put("inserted",true);
                 }
             }
         }else{
             yearRepository.save(year);
             resultMap.put("updated",true);
+            resultMap.put("message","修改年度报表成功");
         }
         return resultMap;
     }

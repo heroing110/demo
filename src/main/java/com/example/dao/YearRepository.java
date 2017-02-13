@@ -12,5 +12,5 @@ public interface YearRepository extends JpaRepository<Year,Long>,JpaSpecificatio
 
     public Year findYearByUserId(Long user_id);
 
-    public Year findYearByYear(String year);
+    public Year findYearByYearAndUserId(String year,Long userId);
 }

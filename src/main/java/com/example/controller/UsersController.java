@@ -72,4 +72,17 @@ public class UsersController {
     public Object update(@RequestBody User user) {
         return usersService.saveUser(user);
     }
+
+    @RequestMapping(value = "changePwd",method = RequestMethod.PUT)
+    public Object changePwd(String userId,@RequestBody Map<String,Object> update) {
+        Map<String,Object> resultMap = Maps.newHashMap();
+        try {
+            return usersService.changePwd(userId,update);
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultMap.put("updated",false);
+            resultMap.put("message","UsersController:changePwd异常");
+            return resultMap;
+        }
+    }
 }

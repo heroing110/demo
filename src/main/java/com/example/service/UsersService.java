@@ -18,4 +18,6 @@ public interface UsersService {
     public Map<String,Object> deleteUser(Long id);
 
     public Object saveUser(User user);
+
+    public Map<String,Object> changePwd(String userId, Map<String, Object> update) throws Exception;
 }

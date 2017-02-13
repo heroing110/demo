@@ -12,5 +12,5 @@ public interface SeasonRepository extends JpaRepository<Season,Long>,JpaSpecific
 
     public Season findSeasonByUserId(Long user_id);
 
-    public Season findSeasonByYearAndSeason(String year,String season);
+    public Season findSeasonByYearAndSeasonAndUserId(String year,String season,Long userId);
 }

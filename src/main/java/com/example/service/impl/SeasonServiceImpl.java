@@ -63,20 +63,21 @@ public class SeasonServiceImpl implements SeasonService {
     public Object saveSeason(Season season) {
         Map<String,Object> resultMap = Maps.newHashMap();
         if(null==season.getId()){
-            Season resultSeason = seasonRepository.findSeasonByYearAndSeason(season.getYear(),season.getSeason());
+            Season resultSeason = seasonRepository.findSeasonByYearAndSeasonAndUserId(season.getYear(),season.getSeason(),season.getUserId());
             if(resultSeason!=null){
-                resultMap.put("exist",true);
+                resultMap.put("message","已存在本季度数据");
                 resultMap.put("inserted",false);
             }else{
                 Season newSeason = seasonRepository.save(season);
                 if(newSeason.getId()!=null){
-                    resultMap.put("exist",false);
+                    resultMap.put("message","新增季度报表成功");
                     resultMap.put("inserted",true);
                 }
             }
         }else{
             seasonRepository.save(season);
             resultMap.put("updated",true);
+            resultMap.put("message","修改季度数据成功");
         }
         return resultMap;
     }

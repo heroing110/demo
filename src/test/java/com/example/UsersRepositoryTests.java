@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.lang.reflect.Method;
 import java.util.List;
 
 /**
@@ -38,5 +39,17 @@ public class UsersRepositoryTests {
     public void test2() throws Exception {
         User users = usersRepository.findUsersByUsernameAndPassword("admin","123456");
         System.out.println("users:"+users);
+    }
+
+    @Test
+    public void test3() throws Exception {
+        User user = usersRepository.findOne(new Long(16));
+        Class<?> clazz = Class.forName("com.example.bean.User");
+        Method method[] = clazz.getMethods();
+        for (int i = 0; i < method.length; ++i) {
+            if(!method[i].getName().endsWith("Class") && method[i].getName().contains("get")){
+                System.out.println(method[i].getName()+":"+method[i].invoke(user));
+            }
+        }
     }
 }

@@ -79,6 +79,7 @@ public class UsersServiceImpl implements UsersService {
         if(yearRepository.findYearByUserId(id)==null && seasonRepository.findSeasonByUserId(id)==null){
             usersRepository.delete(id);
             resultMap.put("removed",true);
+            resultMap.put("message","删除用户信息成功");
         }
 
         return resultMap;
@@ -90,19 +91,41 @@ public class UsersServiceImpl implements UsersService {
         if(null==user.getId()){
             User resultUser = usersRepository.findUserByUsername(user.getUsername());
             if(resultUser!=null){
-                resultMap.put("exist",true);
+                resultMap.put("message","已存在相同登录名用户");
                 resultMap.put("inserted",false);
             }else{
                 User newUser = usersRepository.save(user);
                 if(newUser.getId()!=null){
-                    resultMap.put("exist",false);
+                    resultMap.put("message","添加用户成功");
                     resultMap.put("inserted",true);
                 }
             }
         }else{
             usersRepository.save(user);
             resultMap.put("updated",true);
+            resultMap.put("message","修改用户成功");
         }
+        return resultMap;
+    }
+
+    @Override
+    public Map<String, Object> changePwd(String userId, Map<String, Object> update) throws Exception {
+        Map<String, Object> resultMap = Maps.newHashMap();
+        User user = usersRepository.getOne(Long.parseLong(userId));
+        if (update.containsKey("oldPwd")) {
+            String oldPwd = update.get("oldPwd")+"";
+            if(!user.getPassword().equals(Md5Util.str2Md5(oldPwd))){
+                resultMap.put("updated",false);
+                resultMap.put("message","旧密码输入错误");
+                return resultMap;
+            }
+        }
+
+        String newPwd = update.get("newPwd")+"";
+        user.setPassword(Md5Util.str2Md5(newPwd));
+        usersRepository.save(user);
+        resultMap.put("updated",true);
+        resultMap.put("message","密码修改成功");
         return resultMap;
     }
 }
