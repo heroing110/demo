@@ -4,6 +4,7 @@ import com.example.bean.Year;
 import com.example.service.YearService;
 import com.google.common.collect.Maps;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,14 +42,14 @@ public class YearController {
 
     // POST path = '/insert'
     @RequestMapping(value = "/insert",method = RequestMethod.POST)
-    public Object insert(Year year){
+    public Object insert(@RequestBody Year year){
         return yearService.saveYear(year);
     }
 
 
     // PUT path = '/update', params='yearId'
     @RequestMapping(value = "/update",method = RequestMethod.PUT)
-    public Object update(Year year){
+    public Object update(@RequestBody Year year){
         return yearService.saveYear(year);
     }
 

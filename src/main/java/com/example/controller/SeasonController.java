@@ -4,6 +4,7 @@ import com.example.bean.Season;
 import com.example.service.SeasonService;
 import com.google.common.collect.Maps;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,14 +42,14 @@ public class SeasonController {
 
     // POST path = '/insert'
     @RequestMapping(value = "/insert",method = RequestMethod.POST)
-    public Object insert(Season season){
+    public Object insert(@RequestBody Season season){
         return seasonService.saveSeason(season);
     }
 
 
     // PUT path = '/update'
     @RequestMapping(value = "/update",method = RequestMethod.PUT)
-    public Object update(Season season){
+    public Object update(@RequestBody Season season){
         return seasonService.saveSeason(season);
     }
 
