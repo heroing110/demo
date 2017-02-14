@@ -62,7 +62,7 @@ public class SeasonServiceImpl implements SeasonService {
     @Override
     public Object saveSeason(Season season) {
         Map<String,Object> resultMap = Maps.newHashMap();
-        if(null==season.getId()){
+        if(null==season.getId() || 0==season.getId()){
             Season resultSeason = seasonRepository.findSeasonByYearAndSeasonAndUserId(season.getYear(),season.getSeason(),season.getUserId());
             if(resultSeason!=null){
                 resultMap.put("message","已存在本季度数据");

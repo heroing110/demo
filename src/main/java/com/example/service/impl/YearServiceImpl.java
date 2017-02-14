@@ -62,7 +62,7 @@ public class YearServiceImpl implements YearService {
     @Override
     public Object saveYear(Year year) {
         Map<String,Object> resultMap = Maps.newHashMap();
-        if(null==year.getId()){
+        if(null==year.getId() || 0==year.getId()){
             Year resultYear = yearRepository.findYearByYearAndUserId(year.getYear(),year.getUserId());
             if(resultYear!=null){
                 resultMap.put("message","已存在本年度数据");

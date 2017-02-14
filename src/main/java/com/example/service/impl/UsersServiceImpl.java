@@ -88,7 +88,7 @@ public class UsersServiceImpl implements UsersService {
     @Override
     public Object saveUser(User user) {
         Map<String,Object> resultMap = Maps.newHashMap();
-        if(null==user.getId()){
+        if(null==user.getId() || 0==user.getId()){
             User resultUser = usersRepository.findUserByUsername(user.getUsername());
             if(resultUser!=null){
                 resultMap.put("message","已存在相同登录名用户");

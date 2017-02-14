@@ -33,7 +33,7 @@ public class Year {
     @Column
     private String city;
     @Column
-    private String[] industry;
+    private String industry;
     @Column
     private String[] sale;
     @Column
@@ -274,11 +274,11 @@ public class Year {
         this.city = city;
     }
 
-    public String[] getIndustry() {
+    public String getIndustry() {
         return industry;
     }
 
-    public void setIndustry(String[] industry) {
+    public void setIndustry(String industry) {
         this.industry = industry;
     }
 
