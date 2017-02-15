@@ -33,7 +33,7 @@ public class YearServiceImpl implements YearService {
             public Predicate toPredicate(Root<Year> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
 
                 List<Predicate> predicates = new ArrayList<>();
-                if(null != permission){
+                if("3" != permission){
                     predicates.add(criteriaBuilder.equal(root.get("permission"), permission));
                 }else{
                     if(null != userid){
