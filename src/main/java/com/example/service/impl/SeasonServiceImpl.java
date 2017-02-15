@@ -33,7 +33,7 @@ public class SeasonServiceImpl implements SeasonService {
             public Predicate toPredicate(Root<Season> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
 
                 List<Predicate> predicates = new ArrayList<>();
-                if("3" != permission){
+                if("2" != permission){
                     predicates.add(criteriaBuilder.equal(root.get("permission"), permission));
                 }else{
                     if(null != userid){
