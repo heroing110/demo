@@ -23,6 +23,8 @@ public class User {
     private String permission;
     @Column
     private String usernamecn;
+    @Column
+    private String companyName;
 
     public User() {
     }
@@ -69,6 +71,14 @@ public class User {
 
     public String getUsernamecn() {
         return usernamecn;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 
     public void setUsernamecn(String usernamecn) {
