@@ -37,14 +37,14 @@ public class SeasonServiceImpl implements SeasonService {
                     predicates.add(criteriaBuilder.equal(root.get("permission"), permission));
                 }else{
                     if(null != userid){
-                        predicates.add(criteriaBuilder.equal(root.get("user_id"), userid));
+                        predicates.add(criteriaBuilder.equal(root.get("userId"), userid));
                     }
                 }
                 if(null != cityid){
-                    predicates.add(criteriaBuilder.equal(root.get("city_id"), cityid));
+                    predicates.add(criteriaBuilder.equal(root.get("cityId"), cityid));
                 }
                 if(null != companyName){
-                    predicates.add(criteriaBuilder.like(root.get("company_name"), "%"+companyName+"%"));
+                    predicates.add(criteriaBuilder.like(root.get("companyName"), "%"+companyName+"%"));
                 }
 
                 return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
