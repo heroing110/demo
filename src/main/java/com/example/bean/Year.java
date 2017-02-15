@@ -175,7 +175,7 @@ public class Year {
     @Column
     private String r_cell105;
     @Column
-    private String cityid;
+    private String cityId;
     @Column private String permission;
 
     public Long getId() {
@@ -835,12 +835,12 @@ public class Year {
         this.r_cell105 = r_cell105;
     }
 
-    public String getCityid() {
-        return cityid;
+    public String getCityId() {
+        return cityId;
     }
 
-    public void setCityid(String cityid) {
-        this.cityid = cityid;
+    public void setCityId(String cityId) {
+        this.cityId = cityId;
     }
 
     public Long getUserId() {

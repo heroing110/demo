@@ -67,9 +67,7 @@ public class Season {
     @Column private String cell112;
     @Column private String cell113;
     @Column private String cell114;
-    @Column private String o2oRadio;
     @Column private String cell121;
-    @Column private String mobileRadio;
     @Column private String cell131;
     @Column private String cell141;
     @Column private String cell142;
@@ -80,12 +78,14 @@ public class Season {
     @Column private String cell163;
     @Column private String cell164;
     @Column private String cell165;
+    @Column private String o2oRadio;
+    @Column private String mobileRadio;
     @Column private String companyName;
     @Column private String year;
     @Column private String season;
     @Column private Long userId;
     @Column private String permission;
-    @Column private String cityid;
+    @Column private String cityId;
 
     public Long getId() {
         return id;
@@ -671,12 +671,12 @@ public class Season {
         this.permission = permission;
     }
 
-    public String getCityid() {
-        return cityid;
+    public String getCityId() {
+        return cityId;
     }
 
-    public void setCityid(String cityid) {
-        this.cityid = cityid;
+    public void setCityId(String cityId) {
+        this.cityId = cityId;
     }
 }
 
