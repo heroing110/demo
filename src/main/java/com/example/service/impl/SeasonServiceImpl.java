@@ -41,7 +41,7 @@ public class SeasonServiceImpl implements SeasonService {
                     }
                 }
                 if(null != cityid){
-                    predicates.add(criteriaBuilder.equal(root.get("cityid"), cityid));
+                    predicates.add(criteriaBuilder.equal(root.get("city_id"), cityid));
                 }
                 if(null != companyName){
                     predicates.add(criteriaBuilder.like(root.get("company_name"), "%"+companyName+"%"));
