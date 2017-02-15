@@ -85,6 +85,7 @@ public class Season {
     @Column private String season;
     @Column private Long userId;
     @Column private String permission;
+    @Column private String cityid;
 
     public Long getId() {
         return id;
@@ -668,6 +669,14 @@ public class Season {
 
     public void setPermission(String permission) {
         this.permission = permission;
+    }
+
+    public String getCityid() {
+        return cityid;
+    }
+
+    public void setCityid(String cityid) {
+        this.cityid = cityid;
     }
 }
 
