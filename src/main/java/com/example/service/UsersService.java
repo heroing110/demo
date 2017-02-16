@@ -13,7 +13,7 @@ public interface UsersService {
 
     public Map<String,Object> findUsersByUsernameAndPassword(User users) throws Exception;
 
-    public List<User> findByCondition(String usernamecn, String permission);
+    public List<User> findByCondition(String q_usernamecn, String q_permission,String cityId,String permission);
 
     public Map<String,Object> deleteUser(Long id);
 

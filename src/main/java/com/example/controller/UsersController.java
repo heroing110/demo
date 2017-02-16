@@ -35,13 +35,13 @@ public class UsersController {
 
 
     @RequestMapping(value = "queryAll",method = RequestMethod.GET)
-    public Object queryAll(String usernamecn, String permission) {
+    public Object queryAll(String q_usernamecn, String q_permission,String cityId,String permission) {
         Map<String, Object> resutMap = Maps.newHashMap();
         resutMap.put("status", 1);
         resutMap.put("message", "UsersController:queryAll异常");
 
         try {
-            return usersService.findByCondition(usernamecn,permission);
+            return usersService.findByCondition(q_usernamecn,q_usernamecn,cityId,permission);
         } catch (Exception e) {
             e.printStackTrace();
             return resutMap;

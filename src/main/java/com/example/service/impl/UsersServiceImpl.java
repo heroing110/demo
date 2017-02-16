@@ -1,7 +1,6 @@
 package com.example.service.impl;
 
 import com.example.bean.User;
-import com.example.bean.Year;
 import com.example.dao.SeasonRepository;
 import com.example.dao.UsersRepository;
 import com.example.dao.YearRepository;
@@ -12,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -49,18 +49,23 @@ public class UsersServiceImpl implements UsersService {
         return map;
     }
 
-    public List<User> findByCondition(String usernamecn, String permission){
+    public List<User> findByCondition(String q_usernamecn, String q_permission,String cityId,String permission){
         List<User> resultList = null;
         Specification querySpecifi = new Specification<User>() {
             @Override
             public Predicate toPredicate(Root<User> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
 
                 List<Predicate> predicates = new ArrayList<>();
-                if(null != permission){
-                    predicates.add(criteriaBuilder.equal(root.get("permission"), permission));
+                if(!StringUtils.isEmpty(permission) && "1" == permission){
+                    predicates.add(criteriaBuilder.equal(root.get("cityid"), cityId));
                 }
-                if(null != usernamecn){
-                    predicates.add(criteriaBuilder.like(root.get("usernamecn"), "%"+usernamecn+"%"));
+
+                if(!StringUtils.isEmpty(q_permission)){
+                    predicates.add(criteriaBuilder.equal(root.get("permission"), q_permission));
+                }
+
+                if(!StringUtils.isEmpty(q_usernamecn)){
+                    predicates.add(criteriaBuilder.like(root.get("usernamecn"), "%"+q_usernamecn+"%"));
                 }
 
                 return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
