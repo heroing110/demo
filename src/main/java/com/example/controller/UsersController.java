@@ -73,7 +73,7 @@ public class UsersController {
         return usersService.saveUser(user);
     }
 
-    @RequestMapping(value = "changePwd",method = RequestMethod.PUT)
+    @RequestMapping(value = "changePwd",method = RequestMethod.POST)
     public Object changePwd(String userId,@RequestBody Map<String,Object> update) {
         Map<String,Object> resultMap = Maps.newHashMap();
         try {
