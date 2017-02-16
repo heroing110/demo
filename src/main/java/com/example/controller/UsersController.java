@@ -85,4 +85,25 @@ public class UsersController {
             return resultMap;
         }
     }
+
+    @RequestMapping(value = "allCity",method = RequestMethod.GET)
+    public Object allCity() {
+        Map<String,Object> resultMap = Maps.newHashMap();
+        resultMap.put("1","辽宁");
+        resultMap.put("2","沈阳");
+        resultMap.put("3","大连");
+        resultMap.put("4","鞍山");
+        resultMap.put("5","抚顺");
+        resultMap.put("6","本兮");
+        resultMap.put("7","丹东");
+        resultMap.put("8","锦州");
+        resultMap.put("9","营口");
+        resultMap.put("10","阜新");
+        resultMap.put("11","辽阳");
+        resultMap.put("12","盘锦");
+        resultMap.put("13","铁岭");
+        resultMap.put("14","朝阳");
+        resultMap.put("15","葫芦岛");
+        return resultMap;
+    }
 }
