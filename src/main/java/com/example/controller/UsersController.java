@@ -41,7 +41,7 @@ public class UsersController {
         resutMap.put("message", "UsersController:queryAll异常");
 
         try {
-            return usersService.findByCondition(q_usernamecn,q_usernamecn,cityId,permission);
+            return usersService.findByCondition(q_usernamecn,q_permission,cityId,permission);
         } catch (Exception e) {
             e.printStackTrace();
             return resutMap;
