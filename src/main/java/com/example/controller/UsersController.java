@@ -2,6 +2,7 @@ package com.example.controller;
 
 import com.example.bean.User;
 import com.example.service.UsersService;
+import com.example.util.Md5Util;
 import com.google.common.collect.Maps;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -65,7 +66,16 @@ public class UsersController {
 
     @RequestMapping(value = "insert",method = RequestMethod.PUT)
     public Object insert(@RequestBody User user) {
-        return usersService.saveUser(user);
+        Map<String,Object> resultMap = Maps.newHashMap();
+        try {
+            user.setPassword(Md5Util.str2Md5(user.getPassword()));
+            return usersService.saveUser(user);
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultMap.put("message","新增用户发生错误");
+            resultMap.put("inserted",false);
+        }
+        return resultMap;
     }
 
     @RequestMapping(value = "update",method = RequestMethod.POST)
