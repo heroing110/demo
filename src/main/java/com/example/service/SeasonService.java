@@ -14,4 +14,6 @@ public interface SeasonService {
     public Season findSeasonById(Long id);
 
     public Object saveSeason(Season season);
+
+    public List<List<String>> getSeasonLists(Season season);
 }
