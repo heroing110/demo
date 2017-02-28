@@ -178,6 +178,7 @@ public class Year {
     private String cityId;
     @Column private String permission;
 
+
     public Long getId() {
         return id;
     }

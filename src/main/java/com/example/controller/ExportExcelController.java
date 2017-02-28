@@ -3,7 +3,9 @@ package com.example.controller;
 import com.example.bean.Season;
 import com.example.bean.User;
 import com.example.service.SeasonService;
+import com.example.util.DocumentHandler;
 import com.example.util.ExportExcelUtil;
+import com.example.util.MapUtil;
 import com.google.common.collect.Maps;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -30,7 +33,7 @@ public class ExportExcelController {
     @Autowired
     private SeasonService seasonService;
 
-    @RequestMapping(value = "/download", method = RequestMethod.GET)
+    @RequestMapping(value = "/downloadExcel", method = RequestMethod.GET)
     public Object downloadExcel(HttpServletRequest request, HttpServletResponse response) throws Exception {
         Map<String, Object> resultMap = Maps.newHashMap();
         String seasonId = request.getParameter("seasonId");
@@ -65,5 +68,33 @@ public class ExportExcelController {
         return resultMap;
     }
 
+    @RequestMapping(value = "/downloadWord", method = RequestMethod.GET)
+    public Object downloadWord(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        Map<String, Object> resultMap = Maps.newHashMap();
+        String seasonId = request.getParameter("seasonId");
+        OutputStream os = null;
+
+        try {
+            resultMap.put("flag", true);
+            //数据库取值
+            Season season = seasonService.findSeasonById(Long.parseLong(seasonId));
+            //转换成map
+            Map<String,Object> map = MapUtil.convertBean(season);
+
+            String fileName = "season_data.doc";
+            response.setContentType("application/vnd.ms-word");
+            response.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode(fileName, "utf-8"));
+            os = response.getOutputStream();
+
+            //导出word文件数据
+            DocumentHandler documentHandler = new DocumentHandler();
+            documentHandler.createDoc(map,os);
+        } catch (IOException e) {
+            e.printStackTrace();
+            resultMap.put("flag", false);
+            resultMap.put("message", "导出季度文档异常");
+        }
+        return resultMap;
+    }
 
 }

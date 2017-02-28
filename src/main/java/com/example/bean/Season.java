@@ -1,9 +1,6 @@
 package com.example.bean;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by heying on 2017/2/2 0002.
@@ -12,80 +9,182 @@ import javax.persistence.Id;
 public class Season {
     @Id
     @GeneratedValue
-    @Column private Long id;
-    @Column private String cell11;
-    @Column private String cell12;
-    @Column private String cell13;
-    @Column private String cell14;
-    @Column private String cell15;
-    @Column private String cell21;
-    @Column private String cell22;
-    @Column private String cell23;
-    @Column private String cell24;
-    @Column private String cell25;
-    @Column private String cell31;
-    @Column private String cell32;
-    @Column private String cell33;
-    @Column private String cell34;
-    @Column private String cell35;
-    @Column private String cell41;
-    @Column private String cell42;
-    @Column private String cell43;
-    @Column private String cell44;
-    @Column private String cell45;
-    @Column private String cell51;
-    @Column private String cell52;
-    @Column private String cell53;
-    @Column private String cell54;
-    @Column private String cell55;
-    @Column private String cell61;
-    @Column private String cell62;
-    @Column private String cell63;
-    @Column private String cell64;
-    @Column private String cell65;
-    @Column private String cell71;
-    @Column private String cell72;
-    @Column private String cell73;
-    @Column private String cell74;
-    @Column private String cell75;
-    @Column private String cell81;
-    @Column private String cell82;
-    @Column private String cell83;
-    @Column private String cell84;
-    @Column private String cell85;
-    @Column private String cell91;
-    @Column private String cell92;
-    @Column private String cell93;
-    @Column private String cell94;
-    @Column private String cell95;
-    @Column private String cell101;
-    @Column private String cell102;
-    @Column private String cell103;
-    @Column private String cell104;
-    @Column private String cell105;
-    @Column private String cell111;
-    @Column private String cell112;
-    @Column private String cell113;
-    @Column private String cell114;
-    @Column private String cell121;
-    @Column private String cell131;
-    @Column private String cell141;
-    @Column private String cell142;
-    @Column private String cell151;
-    @Column private String cell152;
-    @Column private String cell161;
-    @Column private String cell162;
-    @Column private String cell163;
-    @Column private String cell164;
-    @Column private String cell165;
-    @Column private String o2oRadio;
-    @Column private String mobileRadio;
-    @Column private String companyName;
-    @Column private String year;
-    @Column private String season;
-    @Column private Long userId;
-    @Column private String permission;
-    @Column private String cityId;
+    private Long id;
+    @Transient
+    private String cell10;
+    @Transient
+    private String cell11;
+    private String cell12;
+    private String cell13;
+    private String cell14;
+    private String cell15;
+    @Transient
+    private String cell20;
+    @Transient
+    private String cell21;
+    private String cell22;
+    private String cell23;
+    private String cell24;
+    private String cell25;
+    @Transient
+    private String cell30;
+    @Transient
+    private String cell31;
+    private String cell32;
+    private String cell33;
+    private String cell34;
+    private String cell35;
+    @Transient
+    private String cell40;
+    @Transient
+    private String cell41;
+    private String cell42;
+    private String cell43;
+    private String cell44;
+    private String cell45;
+    @Transient
+    private String cell50;
+    @Transient
+    private String cell51;
+    private String cell52;
+    private String cell53;
+    private String cell54;
+    private String cell55;
+    @Transient
+    private String cell60;
+    @Transient
+    private String cell61;
+    private String cell62;
+    private String cell63;
+    private String cell64;
+    private String cell65;
+    @Transient
+    private String cell70;
+    @Transient
+    private String cell71;
+    private String cell72;
+    private String cell73;
+    private String cell74;
+    private String cell75;
+    @Transient
+    private String cell80;
+    @Transient
+    private String cell81;
+    private String cell82;
+    private String cell83;
+    private String cell84;
+    private String cell85;
+    @Transient
+    private String cell90;
+    @Transient
+    private String cell91;
+    private String cell92;
+    private String cell93;
+    private String cell94;
+    private String cell95;
+    @Transient
+    private String cell100;
+    @Transient
+    private String cell101;
+    private String cell102;
+    private String cell103;
+    private String cell104;
+    private String cell105;
+    private String cell111;
+    private String cell112;
+    private String cell113;
+    private String cell114;
+    private String cell121;
+    private String cell131;
+    private String cell141;
+    private String cell142;
+    private String cell151;
+    private String cell152;
+    private String cell161;
+    private String cell162;
+    private String cell163;
+    private String cell164;
+    private String cell165;
+    private String o2oRadio;
+    private String mobileRadio;
+    private String companyName;
+    private String year;
+    private String season;
+    private Long userId;
+    private String permission;
+    private String cityId;
+
+    public String getCell20() {
+        return cell20;
+    }
+
+    public void setCell20(String cell20) {
+        this.cell20 = cell20;
+    }
+
+    public String getCell30() {
+        return cell30;
+    }
+
+    public void setCell30(String cell30) {
+        this.cell30 = cell30;
+    }
+
+    public String getCell40() {
+        return cell40;
+    }
+
+    public void setCell40(String cell40) {
+        this.cell40 = cell40;
+    }
+
+    public String getCell50() {
+        return cell50;
+    }
+
+    public void setCell50(String cell50) {
+        this.cell50 = cell50;
+    }
+
+    public String getCell60() {
+        return cell60;
+    }
+
+    public void setCell60(String cell60) {
+        this.cell60 = cell60;
+    }
+
+    public String getCell70() {
+        return cell70;
+    }
+
+    public void setCell70(String cell70) {
+        this.cell70 = cell70;
+    }
+
+    public String getCell80() {
+        return cell80;
+    }
+
+    public void setCell80(String cell80) {
+        this.cell80 = cell80;
+    }
+
+    public String getCell90() {
+        return cell90;
+    }
+
+    public void setCell90(String cell90) {
+        this.cell90 = cell90;
+    }
+
+    public String getCell100() {
+        return cell100;
+    }
+
+    public void setCell100(String cell100) {
+        this.cell100 = cell100;
+    }
 
     public Long getId() {
         return id;
@@ -677,6 +776,14 @@ public class Season {
 
     public void setCityId(String cityId) {
         this.cityId = cityId;
+    }
+
+    public String getCell10() {
+        return cell10;
+    }
+
+    public void setCell10(String cell10) {
+        this.cell10 = cell10;
     }
 }
 
