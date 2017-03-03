@@ -1,5 +1,6 @@
 package com.example.util;
 
+import com.example.bean.Season;
 import com.example.bean.User;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.core.io.ClassPathResource;
@@ -27,7 +28,7 @@ public class ExportExcelUtil {
         return resource.getFile();
     }
 
-    public Workbook writeNewExcel(File file, String sheetName, List<List<String>> lis) throws Exception{
+    public Workbook writeNewExcel(File file, String sheetName, List<Season> lis) throws Exception{
         Workbook wb = null;
         Row row = null;
         Cell cell = null;
@@ -44,17 +45,107 @@ public class ExportExcelUtil {
 
             //按项目实际需求，在该处将对象数据插入到Excel中
 
-            List<String> vo  = lis.get(i);
+            Season vo  = lis.get(i);
             if(null==vo){
                 break;
             }
 
-            for (int i1 = 0; i1 < vo.size(); i1++) {
-                //Cell赋值开始
-                cell = row.createCell(i1);
-                cell.setCellValue(vo.get(i1));
-                cell.setCellStyle(cs);
-            }
+            //Cell赋值开始
+            //序号
+            cell = row.createCell(0);
+            cell.setCellStyle(cs);
+            cell.setCellValue(i+1);
+
+            //企业名称
+            cell = row.createCell(1);
+            cell.setCellStyle(cs);
+            cell.setCellValue(vo.getCompanyName());
+
+            //电子商务交易总额（万元）
+            //企业名称
+            cell = row.createCell(2);
+            cell.setCellStyle(cs);
+            cell.setCellValue(vo.getCell10());
+            //总额
+            //其中；销售额
+            //其中：采购额
+            //服务类交易额（万元）
+            //电子商务服务收入（万元）
+            //通过自营电子商务平台交易总额（万元）
+            //总额
+            //其中；销售额
+            //其中：采购额
+            //服务类交易额（万元）
+            //电子商务服务收入（万元）
+            //通过第三方电子商务平台交易总额（万元）
+            //总额
+            //其中；销售额
+            //其中：采购额
+            //服务类交易额（万元）
+            //电子商务服务收入（万元）
+            //B2B交易总额（万元）
+            //商品类交易额总额（万元)
+            //其中；销售额
+            //其中：采购额
+            //服务类交易额（万元）
+            //电子商务服务收入（万元）
+            //B2C交易总额（万元）
+            //商品类交易总额（万元)
+            //其中；销售额
+            //其中：采购额
+            //服务类交易额（万元）
+            //电子商务服务收入（万元）
+            //C2C交易总额（万元）
+            //商品类交易总额（万元)
+            //其中；销售额
+            //其中：采购额
+            //服务类交易额（万元）
+            //电子商务服务收入（万元）
+            //境内交易总额（万元）
+            //商品类交易总额（万元)
+            //其中；销售额
+            //其中：采购额
+            //服务类交易额（万元）
+            //电子商务服务收入（万元）
+            //境外交易总额（万元）
+            //商品类交易总额（万元)
+            //其中；销售额
+            //其中：采购额
+            //服务类交易额（万元）
+            //电子商务服务收入（万元）
+            //境外进口交易总额（万元）
+            //商品类交易总额（万元)
+//
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         }
         return wb;
     }

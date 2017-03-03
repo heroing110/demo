@@ -16,4 +16,12 @@ public interface SeasonService {
     public Object saveSeason(Season season);
 
     public List<List<String>> getSeasonLists(Season season);
+
+    public List<Season> findSeasonsByUserId(Long id);
+
+    public Season findSeasonByYearAndSeasonAndUserId(String year,String season,Long userId);
+
+    public Season target_season(Season season, Season seasonBefore);
+
+    public List<Season> findByParams(String industry, String year, String season, String cityId);
 }

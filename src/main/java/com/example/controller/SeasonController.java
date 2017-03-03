@@ -53,4 +53,10 @@ public class SeasonController {
         return seasonService.saveSeason(season);
     }
 
+    // PUT path = '/update'
+    @RequestMapping(value = "/chart",method = RequestMethod.GET)
+    public Object chart(String userId) {
+        return seasonService.findSeasonsByUserId(Long.parseLong(userId));
+    }
+
 }

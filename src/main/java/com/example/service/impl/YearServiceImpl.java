@@ -33,15 +33,14 @@ public class YearServiceImpl implements YearService {
             public Predicate toPredicate(Root<Year> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
 
                 List<Predicate> predicates = new ArrayList<>();
-                if("2" != permission){
-                    predicates.add(criteriaBuilder.equal(root.get("permission"), permission));
-                }else{
+                if("1" == permission){
+                    if(null != cityid){
+                        predicates.add(criteriaBuilder.equal(root.get("cityId"), cityid));
+                    }
+                }else if("2" == permission){
                     if(null != userid){
                         predicates.add(criteriaBuilder.equal(root.get("userId"), userid));
                     }
-                }
-                if(null != cityid){
-                    predicates.add(criteriaBuilder.equal(root.get("cityId"), cityid));
                 }
                 if(null != companyName){
                     predicates.add(criteriaBuilder.like(root.get("companyName"), "%"+companyName+"%"));

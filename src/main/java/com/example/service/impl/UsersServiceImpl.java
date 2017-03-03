@@ -81,7 +81,7 @@ public class UsersServiceImpl implements UsersService {
         resultMap.put("removed",false);
         resultMap.put("message","该用户已存在季度或年度报表数据，无法删除");
 
-        if(yearRepository.findYearByUserId(id)==null && seasonRepository.findSeasonByUserId(id)==null){
+        if(yearRepository.findYearsByUserId(id).size()==0 && seasonRepository.findSeasonsByUserId(id).size()==0){
             usersRepository.delete(id);
             resultMap.put("removed",true);
             resultMap.put("message","删除用户信息成功");

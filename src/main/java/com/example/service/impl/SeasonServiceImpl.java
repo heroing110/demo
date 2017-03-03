@@ -3,11 +3,14 @@ package com.example.service.impl;
 import com.example.bean.Season;
 import com.example.dao.SeasonRepository;
 import com.example.service.SeasonService;
+import com.example.util.NumberUtils;
 import com.google.common.collect.Maps;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -33,20 +36,51 @@ public class SeasonServiceImpl implements SeasonService {
             public Predicate toPredicate(Root<Season> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
 
                 List<Predicate> predicates = new ArrayList<>();
-                if("2" != permission){
-                    predicates.add(criteriaBuilder.equal(root.get("permission"), permission));
-                }else{
+                if("1" == permission){
+                    if(null != cityid){
+                        predicates.add(criteriaBuilder.equal(root.get("cityId"), cityid));
+                    }
+                }else if("2" == permission){
                     if(null != userid){
                         predicates.add(criteriaBuilder.equal(root.get("userId"), userid));
                     }
                 }
-                if(null != cityid){
-                    predicates.add(criteriaBuilder.equal(root.get("cityId"), cityid));
-                }
+
                 if(null != companyName){
                     predicates.add(criteriaBuilder.like(root.get("companyName"), "%"+companyName+"%"));
                 }
 
+                return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
+            }
+        };
+        resultList =  seasonRepository.findAll(querySpecifi);
+        return resultList;
+    }
+
+    @Override
+    public List<Season> findByParams(String industry, String year, String season, String cityId){
+        List<Season> resultList = null;
+        Specification querySpecifi = new Specification<Season>() {
+            @Override
+            public Predicate toPredicate(Root<Season> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
+
+                List<Predicate> predicates = new ArrayList<>();
+
+                if(!StringUtils.isEmpty(industry)){
+                    predicates.add(criteriaBuilder.equal(root.get("industry"), industry));
+                }
+
+                if(!StringUtils.isEmpty(year)){
+                    predicates.add(criteriaBuilder.equal(root.get("year"), year));
+                }
+
+                if(!StringUtils.isEmpty(season)){
+                    predicates.add(criteriaBuilder.equal(root.get("season"), season));
+                }
+
+                if(!StringUtils.isEmpty(cityId)){
+                    predicates.add(criteriaBuilder.equal(root.get("cityId"), cityId));
+                }
                 return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
             }
         };
@@ -349,4 +383,240 @@ public class SeasonServiceImpl implements SeasonService {
         //第十三行结束
         return lo;
     }
+
+    public List<Season> findSeasonsByUserId(Long userId){
+        return this.seasonRepository.findSeasonsByUserId(userId);
+    }
+
+    @Override
+    public Season findSeasonByYearAndSeasonAndUserId(String year, String season, Long userId) {
+        return seasonRepository.findSeasonByYearAndSeasonAndUserId(year,season,userId);
+    }
+
+    @Override
+    public Season target_season(Season season, Season seasonBefore) {
+        Season target_season = new Season();
+        BeanUtils.copyProperties(season, target_season);
+        //第一行
+        double cell12 = Double.parseDouble(season.getCell12());
+        double cell13 = Double.parseDouble(season.getCell13());
+        double cell14 = Double.parseDouble(season.getCell14());
+        double cell15 = Double.parseDouble(season.getCell15());
+        double cell10 = cell12+cell13+cell14+cell15;
+        double cell11 = cell12+cell13;
+
+        double b_cell12 = Double.parseDouble(seasonBefore.getCell12());
+        double b_cell13 = Double.parseDouble(seasonBefore.getCell13());
+        double b_cell14 = Double.parseDouble(seasonBefore.getCell14());
+        double b_cell15 = Double.parseDouble(seasonBefore.getCell15());
+        double b_cell10 = b_cell12+b_cell13+b_cell14+b_cell15;
+        double b_cell11 = b_cell12+b_cell13;
+
+        target_season.setCell10(NumberUtils.round((cell10-b_cell10)/b_cell10,2)+"%");
+        target_season.setCell11(NumberUtils.round((cell11-b_cell11)/b_cell11,2)+"%");
+        target_season.setCell12(NumberUtils.round((cell12-b_cell12)/b_cell12,2)+"%");
+        target_season.setCell13(NumberUtils.round((cell13-b_cell13)/b_cell13,2)+"%");
+        target_season.setCell14(NumberUtils.round((cell14-b_cell14)/b_cell14,2)+"%");
+        target_season.setCell15(NumberUtils.round((cell15-b_cell15)/b_cell15,2)+"%");
+
+        //第二行
+        double cell22 = Double.parseDouble(season.getCell22());
+        double cell23 = Double.parseDouble(season.getCell23());
+        double cell24 = Double.parseDouble(season.getCell24());
+        double cell25 = Double.parseDouble(season.getCell25());
+        double cell20 = cell22+cell23+cell24+cell25;
+        double cell21 = cell22+cell23;
+
+        double b_cell22 = Double.parseDouble(seasonBefore.getCell22());
+        double b_cell23 = Double.parseDouble(seasonBefore.getCell23());
+        double b_cell24 = Double.parseDouble(seasonBefore.getCell24());
+        double b_cell25 = Double.parseDouble(seasonBefore.getCell25());
+        double b_cell20 = b_cell22+b_cell23+b_cell24+b_cell25;
+        double b_cell21 = b_cell22+b_cell23;
+
+        target_season.setCell20(NumberUtils.round((cell20-b_cell20)/b_cell20,2)+"%");
+        target_season.setCell21(NumberUtils.round((cell21-b_cell21)/b_cell21,2)+"%");
+        target_season.setCell22(NumberUtils.round((cell22-b_cell22)/b_cell22,2)+"%");
+        target_season.setCell23(NumberUtils.round((cell23-b_cell23)/b_cell23,2)+"%");
+        target_season.setCell24(NumberUtils.round((cell24-b_cell24)/b_cell24,2)+"%");
+        target_season.setCell25(NumberUtils.round((cell25-b_cell25)/b_cell25,2)+"%");
+
+        //第三行
+        double cell32 = Double.parseDouble(season.getCell32());
+        double cell33 = Double.parseDouble(season.getCell33());
+        double cell34 = Double.parseDouble(season.getCell34());
+        double cell35 = Double.parseDouble(season.getCell35());
+        double cell30 = cell32+cell33+cell34+cell35;
+        double cell31 = cell32+cell33;
+
+        double b_cell32 = Double.parseDouble(seasonBefore.getCell32());
+        double b_cell33 = Double.parseDouble(seasonBefore.getCell33());
+        double b_cell34 = Double.parseDouble(seasonBefore.getCell34());
+        double b_cell35 = Double.parseDouble(seasonBefore.getCell35());
+        double b_cell30 = b_cell32+b_cell33+b_cell34+b_cell35;
+        double b_cell31 = b_cell32+b_cell33;
+
+        target_season.setCell30(NumberUtils.round((cell30-b_cell30)/b_cell30,2)+"%");
+        target_season.setCell31(NumberUtils.round((cell31-b_cell31)/b_cell31,2)+"%");
+        target_season.setCell32(NumberUtils.round((cell32-b_cell32)/b_cell32,2)+"%");
+        target_season.setCell33(NumberUtils.round((cell33-b_cell33)/b_cell33,2)+"%");
+        target_season.setCell34(NumberUtils.round((cell34-b_cell34)/b_cell34,2)+"%");
+        target_season.setCell35(NumberUtils.round((cell35-b_cell35)/b_cell35,2)+"%");
+
+        //第四行
+        double cell42 = Double.parseDouble(season.getCell42());
+        double cell43 = Double.parseDouble(season.getCell43());
+        double cell44 = Double.parseDouble(season.getCell44());
+        double cell45 = Double.parseDouble(season.getCell45());
+        double cell40 = cell42+cell43+cell44+cell45;
+        double cell41 = cell42+cell43;
+
+        double b_cell42 = Double.parseDouble(seasonBefore.getCell42());
+        double b_cell43 = Double.parseDouble(seasonBefore.getCell43());
+        double b_cell44 = Double.parseDouble(seasonBefore.getCell44());
+        double b_cell45 = Double.parseDouble(seasonBefore.getCell45());
+        double b_cell40 = b_cell42+b_cell43+b_cell44+b_cell45;
+        double b_cell41 = b_cell42+b_cell43;
+
+        target_season.setCell40(NumberUtils.round((cell40-b_cell40)/b_cell40,2)+"%");
+        target_season.setCell41(NumberUtils.round((cell41-b_cell41)/b_cell41,2)+"%");
+        target_season.setCell42(NumberUtils.round((cell42-b_cell42)/b_cell42,2)+"%");
+        target_season.setCell43(NumberUtils.round((cell43-b_cell43)/b_cell43,2)+"%");
+        target_season.setCell44(NumberUtils.round((cell44-b_cell44)/b_cell44,2)+"%");
+        target_season.setCell45(NumberUtils.round((cell45-b_cell45)/b_cell45,2)+"%");
+
+        //第五行
+        double cell52 = Double.parseDouble(season.getCell52());
+        double cell53 = Double.parseDouble(season.getCell53());
+        double cell54 = Double.parseDouble(season.getCell54());
+        double cell55 = Double.parseDouble(season.getCell55());
+        double cell50 = cell52+cell53+cell54+cell55;
+        double cell51 = cell52+cell53;
+
+        double b_cell52 = Double.parseDouble(seasonBefore.getCell52());
+        double b_cell53 = Double.parseDouble(seasonBefore.getCell53());
+        double b_cell54 = Double.parseDouble(seasonBefore.getCell54());
+        double b_cell55 = Double.parseDouble(seasonBefore.getCell55());
+        double b_cell50 = b_cell52+b_cell53+b_cell54+b_cell55;
+        double b_cell51 = b_cell52+b_cell53;
+
+        target_season.setCell50(NumberUtils.round((cell50-b_cell50)/b_cell50,2)+"%");
+        target_season.setCell51(NumberUtils.round((cell51-b_cell51)/b_cell51,2)+"%");
+        target_season.setCell52(NumberUtils.round((cell52-b_cell52)/b_cell52,2)+"%");
+        target_season.setCell53(NumberUtils.round((cell53-b_cell53)/b_cell53,2)+"%");
+        target_season.setCell54(NumberUtils.round((cell54-b_cell54)/b_cell54,2)+"%");
+        target_season.setCell55(NumberUtils.round((cell55-b_cell55)/b_cell55,2)+"%");
+
+        //第六行
+        double cell62 = Double.parseDouble(season.getCell62());
+        double cell63 = Double.parseDouble(season.getCell63());
+        double cell64 = Double.parseDouble(season.getCell64());
+        double cell65 = Double.parseDouble(season.getCell65());
+        double cell60 = cell62+cell63+cell64+cell65;
+        double cell61 = cell62+cell63;
+
+        double b_cell62 = Double.parseDouble(seasonBefore.getCell62());
+        double b_cell63 = Double.parseDouble(seasonBefore.getCell63());
+        double b_cell64 = Double.parseDouble(seasonBefore.getCell64());
+        double b_cell65 = Double.parseDouble(seasonBefore.getCell65());
+        double b_cell60 = b_cell62+b_cell63+b_cell64+b_cell65;
+        double b_cell61 = b_cell62+b_cell63;
+
+        target_season.setCell60(NumberUtils.round((cell60-b_cell60)/b_cell60,2)+"%");
+        target_season.setCell61(NumberUtils.round((cell61-b_cell61)/b_cell61,2)+"%");
+        target_season.setCell62(NumberUtils.round((cell62-b_cell62)/b_cell62,2)+"%");
+        target_season.setCell63(NumberUtils.round((cell63-b_cell63)/b_cell63,2)+"%");
+        target_season.setCell64(NumberUtils.round((cell64-b_cell64)/b_cell64,2)+"%");
+        target_season.setCell65(NumberUtils.round((cell65-b_cell65)/b_cell65,2)+"%");
+
+        //第七行
+        double cell72 = Double.parseDouble(season.getCell72());
+        double cell73 = Double.parseDouble(season.getCell73());
+        double cell74 = Double.parseDouble(season.getCell74());
+        double cell75 = Double.parseDouble(season.getCell75());
+        double cell70 = cell72+cell73+cell74+cell75;
+        double cell71 = cell72+cell73;
+
+        double b_cell72 = Double.parseDouble(seasonBefore.getCell72());
+        double b_cell73 = Double.parseDouble(seasonBefore.getCell73());
+        double b_cell74 = Double.parseDouble(seasonBefore.getCell74());
+        double b_cell75 = Double.parseDouble(seasonBefore.getCell75());
+        double b_cell70 = b_cell72+b_cell73+b_cell74+b_cell75;
+        double b_cell71 = b_cell72+b_cell73;
+
+        target_season.setCell70(NumberUtils.round((cell70-b_cell70)/b_cell70,2)+"%");
+        target_season.setCell71(NumberUtils.round((cell71-b_cell71)/b_cell71,2)+"%");
+        target_season.setCell72(NumberUtils.round((cell72-b_cell72)/b_cell72,2)+"%");
+        target_season.setCell73(NumberUtils.round((cell73-b_cell73)/b_cell73,2)+"%");
+        target_season.setCell74(NumberUtils.round((cell74-b_cell74)/b_cell74,2)+"%");
+        target_season.setCell75(NumberUtils.round((cell75-b_cell75)/b_cell75,2)+"%");
+
+        //第八行
+        double cell82 = Double.parseDouble(season.getCell82());
+        double cell83 = Double.parseDouble(season.getCell83());
+        double cell84 = Double.parseDouble(season.getCell84());
+        double cell85 = Double.parseDouble(season.getCell85());
+        double cell80 = cell82+cell83+cell84+cell85;
+        double cell81 = cell82+cell83;
+
+        double b_cell82 = Double.parseDouble(seasonBefore.getCell82());
+        double b_cell83 = Double.parseDouble(seasonBefore.getCell83());
+        double b_cell84 = Double.parseDouble(seasonBefore.getCell84());
+        double b_cell85 = Double.parseDouble(seasonBefore.getCell85());
+        double b_cell80 = b_cell82+b_cell83+b_cell84+b_cell85;
+        double b_cell81 = b_cell82+b_cell83;
+
+        target_season.setCell80(NumberUtils.round((cell80-b_cell80)/b_cell80,2)+"%");
+        target_season.setCell81(NumberUtils.round((cell81-b_cell81)/b_cell81,2)+"%");
+        target_season.setCell82(NumberUtils.round((cell82-b_cell82)/b_cell82,2)+"%");
+        target_season.setCell83(NumberUtils.round((cell83-b_cell83)/b_cell83,2)+"%");
+        target_season.setCell84(NumberUtils.round((cell84-b_cell84)/b_cell84,2)+"%");
+        target_season.setCell85(NumberUtils.round((cell85-b_cell85)/b_cell85,2)+"%");
+
+        //第九行
+        double cell92 = Double.parseDouble(season.getCell92());
+        double cell93 = Double.parseDouble(season.getCell93());
+        double cell94 = Double.parseDouble(season.getCell94());
+        double cell95 = Double.parseDouble(season.getCell95());
+        double cell90 = cell92+cell93+cell94+cell95;
+        double cell91 = cell92+cell93;
+
+        double b_cell92 = Double.parseDouble(seasonBefore.getCell92());
+        double b_cell93 = Double.parseDouble(seasonBefore.getCell93());
+        double b_cell94 = Double.parseDouble(seasonBefore.getCell94());
+        double b_cell95 = Double.parseDouble(seasonBefore.getCell95());
+        double b_cell90 = b_cell92+b_cell93+b_cell94+b_cell95;
+        double b_cell91 = b_cell92+b_cell93;
+
+        target_season.setCell90(NumberUtils.round((cell90-b_cell90)/b_cell90,2)+"%");
+        target_season.setCell91(NumberUtils.round((cell91-b_cell91)/b_cell91,2)+"%");
+        target_season.setCell92(NumberUtils.round((cell92-b_cell92)/b_cell92,2)+"%");
+        target_season.setCell93(NumberUtils.round((cell93-b_cell93)/b_cell93,2)+"%");
+        target_season.setCell94(NumberUtils.round((cell94-b_cell94)/b_cell94,2)+"%");
+        target_season.setCell95(NumberUtils.round((cell95-b_cell95)/b_cell95,2)+"%");
+
+        //第十行
+        double cell102 = Double.parseDouble(season.getCell102());
+        double cell103 = Double.parseDouble(season.getCell103());
+        double cell104 = Double.parseDouble(season.getCell104());
+        double cell105 = Double.parseDouble(season.getCell105());
+        double cell100 = cell102+cell103+cell104+cell105;
+        double cell101 = cell102+cell103;
+
+        double b_cell102 = Double.parseDouble(seasonBefore.getCell102());
+        double b_cell103 = Double.parseDouble(seasonBefore.getCell103());
+        double b_cell104 = Double.parseDouble(seasonBefore.getCell104());
+        double b_cell105 = Double.parseDouble(seasonBefore.getCell105());
+        double b_cell100 = b_cell102+b_cell103+b_cell104+b_cell105;
+        double b_cell101 = b_cell102+b_cell103;
+
+        target_season.setCell100(NumberUtils.round((cell100-b_cell100)/b_cell100,2)+"%");
+        target_season.setCell101(NumberUtils.round((cell101-b_cell101)/b_cell101,2)+"%");
+        target_season.setCell102(NumberUtils.round((cell102-b_cell102)/b_cell102,2)+"%");
+        target_season.setCell103(NumberUtils.round((cell103-b_cell103)/b_cell103,2)+"%");
+        target_season.setCell104(NumberUtils.round((cell104-b_cell104)/b_cell104,2)+"%");
+        target_season.setCell105(NumberUtils.round((cell105-b_cell105)/b_cell105,2)+"%");
+        return target_season;
+    }
+
 }

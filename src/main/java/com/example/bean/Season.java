@@ -113,9 +113,18 @@ public class Season {
     private Long userId;
     private String permission;
     private String cityId;
+    private String industry;
+
+    public String getIndustry() {
+        return industry;
+    }
+
+    public void setIndustry(String industry) {
+        this.industry = industry;
+    }
 
     public String getCell20() {
-        return cell20;
+        return (Integer.parseInt(cell22)+Integer.parseInt(cell23)+Integer.parseInt(cell24)+Integer.parseInt(cell25))+"";
     }
 
     public void setCell20(String cell20) {
@@ -123,7 +132,7 @@ public class Season {
     }
 
     public String getCell30() {
-        return cell30;
+        return (Integer.parseInt(cell32)+Integer.parseInt(cell33)+Integer.parseInt(cell34)+Integer.parseInt(cell35))+"";
     }
 
     public void setCell30(String cell30) {
@@ -131,7 +140,7 @@ public class Season {
     }
 
     public String getCell40() {
-        return cell40;
+        return (Integer.parseInt(cell42)+Integer.parseInt(cell43)+Integer.parseInt(cell44)+Integer.parseInt(cell45))+"";
     }
 
     public void setCell40(String cell40) {
@@ -139,7 +148,7 @@ public class Season {
     }
 
     public String getCell50() {
-        return cell50;
+        return (Integer.parseInt(cell52)+Integer.parseInt(cell53)+Integer.parseInt(cell54)+Integer.parseInt(cell55))+"";
     }
 
     public void setCell50(String cell50) {
@@ -779,7 +788,7 @@ public class Season {
     }
 
     public String getCell10() {
-        return cell10;
+        return (Integer.parseInt(cell12)+Integer.parseInt(cell13)+Integer.parseInt(cell14)+Integer.parseInt(cell15))+"";
     }
 
     public void setCell10(String cell10) {
