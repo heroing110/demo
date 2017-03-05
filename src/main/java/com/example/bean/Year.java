@@ -1,9 +1,10 @@
 package com.example.bean;
 
 
-import com.example.util.StringUtils;
-
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Transient;
 
 /**
  * Created by heying on 2017/2/1 0001.
@@ -20,15 +21,20 @@ public class Year {
     private String cell33;
     private String cell34;
     private String cell35;
-    private String cell36;
-    private String cell37;
-    private String cell38;
+    private String cell36a;
+    private String cell36b;
+    private String cell37a;
+    private String cell37b;
+    private String cell38a;
+    private String cell38b;
     private String city;
     private String industry;
     private String[] sale;
     private String[] crossCountry;
-    private String cell41;
-    private String cell42;
+    private String cell41a;
+    private String cell41b;
+    private String cell42a;
+    private String cell42b;
     @Transient private String cell51;
     private String cell52;
     private String cell53;
@@ -37,6 +43,9 @@ public class Year {
     private String cell62;
     private String cell63;
     private String cell64;
+    @Transient private String cell65;
+    private String cell66;
+    private String cell67;
     private String cell71;
     private String cell72;
     private String cell73;
@@ -114,28 +123,52 @@ public class Year {
         this.cell35 = cell35;
     }
 
-    public String getCell36() {
-        return cell36;
+    public String getCell36a() {
+        return cell36a;
     }
 
-    public void setCell36(String cell36) {
-        this.cell36 = cell36;
+    public void setCell36a(String cell36a) {
+        this.cell36a = cell36a;
     }
 
-    public String getCell37() {
-        return cell37;
+    public String getCell36b() {
+        return cell36b;
     }
 
-    public void setCell37(String cell37) {
-        this.cell37 = cell37;
+    public void setCell36b(String cell36b) {
+        this.cell36b = cell36b;
     }
 
-    public String getCell38() {
-        return cell38;
+    public String getCell37a() {
+        return cell37a;
     }
 
-    public void setCell38(String cell38) {
-        this.cell38 = cell38;
+    public void setCell37a(String cell37a) {
+        this.cell37a = cell37a;
+    }
+
+    public String getCell37b() {
+        return cell37b;
+    }
+
+    public void setCell37b(String cell37b) {
+        this.cell37b = cell37b;
+    }
+
+    public String getCell38a() {
+        return cell38a;
+    }
+
+    public void setCell38a(String cell38a) {
+        this.cell38a = cell38a;
+    }
+
+    public String getCell38b() {
+        return cell38b;
+    }
+
+    public void setCell38b(String cell38b) {
+        this.cell38b = cell38b;
     }
 
     public String getCity() {
@@ -154,36 +187,52 @@ public class Year {
         this.industry = industry;
     }
 
-    public String getSale() {
-        return StringUtils.join(sale,",");
+    public String[] getSale() {
+        return sale;
     }
 
     public void setSale(String[] sale) {
         this.sale = sale;
     }
 
-    public String getCrossCountry() {
-        return StringUtils.join(crossCountry,",");
+    public String[] getCrossCountry() {
+        return crossCountry;
     }
 
     public void setCrossCountry(String[] crossCountry) {
         this.crossCountry = crossCountry;
     }
 
-    public String getCell41() {
-        return cell41;
+    public String getCell41a() {
+        return cell41a;
     }
 
-    public void setCell41(String cell41) {
-        this.cell41 = cell41;
+    public void setCell41a(String cell41a) {
+        this.cell41a = cell41a;
     }
 
-    public String getCell42() {
-        return cell42;
+    public String getCell41b() {
+        return cell41b;
     }
 
-    public void setCell42(String cell42) {
-        this.cell42 = cell42;
+    public void setCell41b(String cell41b) {
+        this.cell41b = cell41b;
+    }
+
+    public String getCell42a() {
+        return cell42a;
+    }
+
+    public void setCell42a(String cell42a) {
+        this.cell42a = cell42a;
+    }
+
+    public String getCell42b() {
+        return cell42b;
+    }
+
+    public void setCell42b(String cell42b) {
+        this.cell42b = cell42b;
     }
 
     public String getCell51() {
@@ -328,5 +377,29 @@ public class Year {
 
     public void setPermission(String permission) {
         this.permission = permission;
+    }
+
+    public String getCell65() {
+        return cell65;
+    }
+
+    public void setCell65(String cell65) {
+        this.cell65 = cell65;
+    }
+
+    public String getCell66() {
+        return cell66;
+    }
+
+    public void setCell66(String cell66) {
+        this.cell66 = cell66;
+    }
+
+    public String getCell67() {
+        return cell67;
+    }
+
+    public void setCell67(String cell67) {
+        this.cell67 = cell67;
     }
 }

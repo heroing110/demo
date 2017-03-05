@@ -1,19 +1,15 @@
 package com.example.controller;
 
 import com.example.bean.Season;
-import com.example.bean.User;
 import com.example.bean.Year;
 import com.example.service.SeasonService;
 import com.example.service.YearService;
 import com.example.util.DocumentHandler;
 import com.example.util.ExportExcelUtil;
 import com.example.util.MapUtil;
-import com.example.util.NumberUtils;
 import com.google.common.collect.Maps;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,8 +19,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.net.URLEncoder;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 

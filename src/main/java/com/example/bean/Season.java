@@ -1,6 +1,12 @@
 package com.example.bean;
 
-import javax.persistence.*;
+
+import org.springframework.util.StringUtils;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Transient;
 
 /**
  * Created by heying on 2017/2/2 0002.
@@ -124,7 +130,7 @@ public class Season {
     }
 
     public String getCell20() {
-        return (Integer.parseInt(cell22)+Integer.parseInt(cell23)+Integer.parseInt(cell24)+Integer.parseInt(cell25))+"";
+        return (Integer.parseInt(StringUtils.isEmpty(cell22)?"0":cell22)+Integer.parseInt(StringUtils.isEmpty(cell23)?"0":cell23)+Integer.parseInt(StringUtils.isEmpty(cell24)?"0":cell24)+Integer.parseInt(StringUtils.isEmpty(cell15)?"0":cell15))+"";
     }
 
     public void setCell20(String cell20) {
@@ -132,7 +138,7 @@ public class Season {
     }
 
     public String getCell30() {
-        return (Integer.parseInt(cell32)+Integer.parseInt(cell33)+Integer.parseInt(cell34)+Integer.parseInt(cell35))+"";
+        return (Integer.parseInt(StringUtils.isEmpty(cell32)?"0":cell32)+Integer.parseInt(StringUtils.isEmpty(cell33)?"0":cell33)+Integer.parseInt(StringUtils.isEmpty(cell34)?"0":cell34)+Integer.parseInt(StringUtils.isEmpty(cell35)?"0":cell35))+"";
     }
 
     public void setCell30(String cell30) {
@@ -140,7 +146,7 @@ public class Season {
     }
 
     public String getCell40() {
-        return (Integer.parseInt(cell42)+Integer.parseInt(cell43)+Integer.parseInt(cell44)+Integer.parseInt(cell45))+"";
+        return (Integer.parseInt(StringUtils.isEmpty(cell42)?"0":cell42)+Integer.parseInt(StringUtils.isEmpty(cell43)?"0":cell43)+Integer.parseInt(StringUtils.isEmpty(cell44)?"0":cell44)+Integer.parseInt(StringUtils.isEmpty(cell45)?"0":cell45))+"";
     }
 
     public void setCell40(String cell40) {
@@ -148,7 +154,7 @@ public class Season {
     }
 
     public String getCell50() {
-        return (Integer.parseInt(cell52)+Integer.parseInt(cell53)+Integer.parseInt(cell54)+Integer.parseInt(cell55))+"";
+        return (Integer.parseInt(StringUtils.isEmpty(cell52)?"0":cell52)+Integer.parseInt(StringUtils.isEmpty(cell53)?"0":cell53)+Integer.parseInt(StringUtils.isEmpty(cell54)?"0":cell54)+Integer.parseInt(StringUtils.isEmpty(cell55)?"0":cell55))+"";
     }
 
     public void setCell50(String cell50) {
@@ -788,7 +794,7 @@ public class Season {
     }
 
     public String getCell10() {
-        return (Integer.parseInt(cell12)+Integer.parseInt(cell13)+Integer.parseInt(cell14)+Integer.parseInt(cell15))+"";
+        return (Integer.parseInt(StringUtils.isEmpty(cell12)?"0":cell12)+Integer.parseInt(StringUtils.isEmpty(cell13)?"0":cell13)+Integer.parseInt(StringUtils.isEmpty(cell14)?"0":cell14)+Integer.parseInt(StringUtils.isEmpty(cell15)?"0":cell15))+"";
     }
 
     public void setCell10(String cell10) {
