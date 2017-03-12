@@ -26,30 +26,29 @@ public class YearServiceImpl implements YearService {
     @Autowired
     private YearRepository yearRepository;
 
-    public List<Year> findByCondition(String cityid, String userid, String permission,String companyName){
+    public List<Year> findByCondition(String cityid, String userid, String permission, String companyName) {
         List<Year> resultList = null;
         Specification querySpecifi = new Specification<Year>() {
             @Override
             public Predicate toPredicate(Root<Year> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
 
                 List<Predicate> predicates = new ArrayList<>();
-                if("1" == permission){
-                    if(null != cityid){
-                        predicates.add(criteriaBuilder.equal(root.get("cityId"), cityid));
-                    }
-                }else if("2" == permission){
-                    if(null != userid){
+
+                switch (permission) {
+                    case "2":
                         predicates.add(criteriaBuilder.equal(root.get("userId"), userid));
-                    }
+                    case "1":
+                        predicates.add(criteriaBuilder.equal(root.get("cityId"), cityid));
                 }
-                if(null != companyName){
-                    predicates.add(criteriaBuilder.like(root.get("companyName"), "%"+companyName+"%"));
+
+                if (null != companyName) {
+                    predicates.add(criteriaBuilder.like(root.get("companyName"), "%" + companyName + "%"));
                 }
 
                 return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
             }
         };
-        resultList =  yearRepository.findAll(querySpecifi);
+        resultList = yearRepository.findAll(querySpecifi);
         return resultList;
     }
 
@@ -60,23 +59,23 @@ public class YearServiceImpl implements YearService {
 
     @Override
     public Object saveYear(Year year) {
-        Map<String,Object> resultMap = Maps.newHashMap();
-        if(null==year.getId() || 0==year.getId()){
-            Year resultYear = yearRepository.findYearByYearAndUserId(year.getYear(),year.getUserId());
-            if(resultYear!=null){
-                resultMap.put("message","已存在本年度数据");
-                resultMap.put("inserted",false);
-            }else{
+        Map<String, Object> resultMap = Maps.newHashMap();
+        if (null == year.getId() || 0 == year.getId()) {
+            Year resultYear = yearRepository.findYearByYearAndUserId(year.getYear(), year.getUserId());
+            if (resultYear != null) {
+                resultMap.put("message", "已存在本年度数据");
+                resultMap.put("inserted", false);
+            } else {
                 Year newYear = yearRepository.save(year);
-                if(newYear.getId()!=null){
-                    resultMap.put("message","新增年度报表成功");
-                    resultMap.put("inserted",true);
+                if (newYear.getId() != null) {
+                    resultMap.put("message", "新增年度报表成功");
+                    resultMap.put("inserted", true);
                 }
             }
-        }else{
+        } else {
             yearRepository.save(year);
-            resultMap.put("updated",true);
-            resultMap.put("message","修改年度报表成功");
+            resultMap.put("updated", true);
+            resultMap.put("message", "修改年度报表成功");
         }
         return resultMap;
     }

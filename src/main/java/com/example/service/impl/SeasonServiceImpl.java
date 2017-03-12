@@ -36,14 +36,11 @@ public class SeasonServiceImpl implements SeasonService {
             public Predicate toPredicate(Root<Season> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
 
                 List<Predicate> predicates = new ArrayList<>();
-                if("1" == permission){
-                    if(null != cityid){
-                        predicates.add(criteriaBuilder.equal(root.get("cityId"), cityid));
-                    }
-                }else if("2" == permission){
-                    if(null != userid){
+                switch (permission) {
+                    case "2":
                         predicates.add(criteriaBuilder.equal(root.get("userId"), userid));
-                    }
+                    case "1":
+                        predicates.add(criteriaBuilder.equal(root.get("cityId"), cityid));
                 }
 
                 if(null != companyName){
@@ -97,7 +94,12 @@ public class SeasonServiceImpl implements SeasonService {
     public Object saveSeason(Season season) {
         Map<String,Object> resultMap = Maps.newHashMap();
         if(null==season.getId() || 0==season.getId()){
-            Season resultSeason = seasonRepository.findSeasonByYearAndSeasonAndUserId(season.getYear(),season.getSeason(),season.getUserId());
+            Season resultSeason = seasonRepository.findSeasonByYearAndSeasonAndUserId(
+                    season.getYear(),
+                    season.getSeason(),
+                    season.getUserId()
+            );
+
             if(resultSeason!=null){
                 resultMap.put("message","已存在本季度数据");
                 resultMap.put("inserted",false);
