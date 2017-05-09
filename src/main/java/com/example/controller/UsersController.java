@@ -104,7 +104,7 @@ public class UsersController {
         resultMap.put("3","大连");
         resultMap.put("4","鞍山");
         resultMap.put("5","抚顺");
-        resultMap.put("6","本兮");
+        resultMap.put("6","本溪");
         resultMap.put("7","丹东");
         resultMap.put("8","锦州");
         resultMap.put("9","营口");
