@@ -1,8 +1,6 @@
 package com.example.bean;
 
 
-import org.springframework.util.StringUtils;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -121,92 +119,20 @@ public class Season {
     private String cityId;
     private String industry;
 
-    public String getIndustry() {
-        return industry;
-    }
-
-    public void setIndustry(String industry) {
-        this.industry = industry;
-    }
-
-    public String getCell20() {
-        return (Integer.parseInt(StringUtils.isEmpty(cell22)?"0":cell22)+Integer.parseInt(StringUtils.isEmpty(cell23)?"0":cell23)+Integer.parseInt(StringUtils.isEmpty(cell24)?"0":cell24)+Integer.parseInt(StringUtils.isEmpty(cell15)?"0":cell15))+"";
-    }
-
-    public void setCell20(String cell20) {
-        this.cell20 = cell20;
-    }
-
-    public String getCell30() {
-        return (Integer.parseInt(StringUtils.isEmpty(cell32)?"0":cell32)+Integer.parseInt(StringUtils.isEmpty(cell33)?"0":cell33)+Integer.parseInt(StringUtils.isEmpty(cell34)?"0":cell34)+Integer.parseInt(StringUtils.isEmpty(cell35)?"0":cell35))+"";
-    }
-
-    public void setCell30(String cell30) {
-        this.cell30 = cell30;
-    }
-
-    public String getCell40() {
-        return (Integer.parseInt(StringUtils.isEmpty(cell42)?"0":cell42)+Integer.parseInt(StringUtils.isEmpty(cell43)?"0":cell43)+Integer.parseInt(StringUtils.isEmpty(cell44)?"0":cell44)+Integer.parseInt(StringUtils.isEmpty(cell45)?"0":cell45))+"";
-    }
-
-    public void setCell40(String cell40) {
-        this.cell40 = cell40;
-    }
-
-    public String getCell50() {
-        return (Integer.parseInt(StringUtils.isEmpty(cell52)?"0":cell52)+Integer.parseInt(StringUtils.isEmpty(cell53)?"0":cell53)+Integer.parseInt(StringUtils.isEmpty(cell54)?"0":cell54)+Integer.parseInt(StringUtils.isEmpty(cell55)?"0":cell55))+"";
-    }
-
-    public void setCell50(String cell50) {
-        this.cell50 = cell50;
-    }
-
-    public String getCell60() {
-        return cell60;
-    }
-
-    public void setCell60(String cell60) {
-        this.cell60 = cell60;
-    }
-
-    public String getCell70() {
-        return cell70;
-    }
-
-    public void setCell70(String cell70) {
-        this.cell70 = cell70;
-    }
-
-    public String getCell80() {
-        return cell80;
-    }
-
-    public void setCell80(String cell80) {
-        this.cell80 = cell80;
-    }
-
-    public String getCell90() {
-        return cell90;
-    }
-
-    public void setCell90(String cell90) {
-        this.cell90 = cell90;
-    }
-
-    public String getCell100() {
-        return cell100;
-    }
-
-    public void setCell100(String cell100) {
-        this.cell100 = cell100;
-    }
-
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getCell10() {
+        return cell10;
+    }
+
+    public void setCell10(String cell10) {
+        this.cell10 = cell10;
     }
 
     public String getCell11() {
@@ -249,6 +175,14 @@ public class Season {
         this.cell15 = cell15;
     }
 
+    public String getCell20() {
+        return cell20;
+    }
+
+    public void setCell20(String cell20) {
+        this.cell20 = cell20;
+    }
+
     public String getCell21() {
         return cell21;
     }
@@ -287,6 +221,14 @@ public class Season {
 
     public void setCell25(String cell25) {
         this.cell25 = cell25;
+    }
+
+    public String getCell30() {
+        return cell30;
+    }
+
+    public void setCell30(String cell30) {
+        this.cell30 = cell30;
     }
 
     public String getCell31() {
@@ -329,6 +271,14 @@ public class Season {
         this.cell35 = cell35;
     }
 
+    public String getCell40() {
+        return cell40;
+    }
+
+    public void setCell40(String cell40) {
+        this.cell40 = cell40;
+    }
+
     public String getCell41() {
         return cell41;
     }
@@ -367,6 +317,14 @@ public class Season {
 
     public void setCell45(String cell45) {
         this.cell45 = cell45;
+    }
+
+    public String getCell50() {
+        return cell50;
+    }
+
+    public void setCell50(String cell50) {
+        this.cell50 = cell50;
     }
 
     public String getCell51() {
@@ -409,6 +367,14 @@ public class Season {
         this.cell55 = cell55;
     }
 
+    public String getCell60() {
+        return cell60;
+    }
+
+    public void setCell60(String cell60) {
+        this.cell60 = cell60;
+    }
+
     public String getCell61() {
         return cell61;
     }
@@ -447,6 +413,14 @@ public class Season {
 
     public void setCell65(String cell65) {
         this.cell65 = cell65;
+    }
+
+    public String getCell70() {
+        return cell70;
+    }
+
+    public void setCell70(String cell70) {
+        this.cell70 = cell70;
     }
 
     public String getCell71() {
@@ -489,6 +463,14 @@ public class Season {
         this.cell75 = cell75;
     }
 
+    public String getCell80() {
+        return cell80;
+    }
+
+    public void setCell80(String cell80) {
+        this.cell80 = cell80;
+    }
+
     public String getCell81() {
         return cell81;
     }
@@ -529,6 +511,14 @@ public class Season {
         this.cell85 = cell85;
     }
 
+    public String getCell90() {
+        return cell90;
+    }
+
+    public void setCell90(String cell90) {
+        this.cell90 = cell90;
+    }
+
     public String getCell91() {
         return cell91;
     }
@@ -567,6 +557,14 @@ public class Season {
 
     public void setCell95(String cell95) {
         this.cell95 = cell95;
+    }
+
+    public String getCell100() {
+        return cell100;
+    }
+
+    public void setCell100(String cell100) {
+        this.cell100 = cell100;
     }
 
     public String getCell101() {
@@ -641,28 +639,12 @@ public class Season {
         this.cell114 = cell114;
     }
 
-    public String getO2oRadio() {
-        return o2oRadio;
-    }
-
-    public void setO2oRadio(String o2oRadio) {
-        this.o2oRadio = o2oRadio;
-    }
-
     public String getCell121() {
         return cell121;
     }
 
     public void setCell121(String cell121) {
         this.cell121 = cell121;
-    }
-
-    public String getMobileRadio() {
-        return mobileRadio;
-    }
-
-    public void setMobileRadio(String mobileRadio) {
-        this.mobileRadio = mobileRadio;
     }
 
     public String getCell131() {
@@ -745,6 +727,22 @@ public class Season {
         this.cell165 = cell165;
     }
 
+    public String getO2oRadio() {
+        return o2oRadio;
+    }
+
+    public void setO2oRadio(String o2oRadio) {
+        this.o2oRadio = o2oRadio;
+    }
+
+    public String getMobileRadio() {
+        return mobileRadio;
+    }
+
+    public void setMobileRadio(String mobileRadio) {
+        this.mobileRadio = mobileRadio;
+    }
+
     public String getCompanyName() {
         return companyName;
     }
@@ -793,12 +791,12 @@ public class Season {
         this.cityId = cityId;
     }
 
-    public String getCell10() {
-        return (Integer.parseInt(StringUtils.isEmpty(cell12)?"0":cell12)+Integer.parseInt(StringUtils.isEmpty(cell13)?"0":cell13)+Integer.parseInt(StringUtils.isEmpty(cell14)?"0":cell14)+Integer.parseInt(StringUtils.isEmpty(cell15)?"0":cell15))+"";
+    public String getIndustry() {
+        return industry;
     }
 
-    public void setCell10(String cell10) {
-        this.cell10 = cell10;
+    public void setIndustry(String industry) {
+        this.industry = industry;
     }
 }
 
