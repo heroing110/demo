@@ -79,4 +79,9 @@ public class YearServiceImpl implements YearService {
         }
         return resultMap;
     }
+
+    @Override
+    public void removeYearById(long l) {
+        yearRepository.removeYearById(l);
+    }
 }

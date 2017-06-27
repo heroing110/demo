@@ -25,7 +25,6 @@ public class YearController {
         Map<String, Object> resutMap = Maps.newHashMap();
         resutMap.put("status", 1);
         resutMap.put("message", "YearController:queryAll异常");
-
         try {
             return yearService.findByCondition(cityId,userId,permission,companyName);
         } catch (Exception e) {
@@ -51,6 +50,22 @@ public class YearController {
     @RequestMapping(value = "/update",method = RequestMethod.PUT)
     public Object update(@RequestBody Year year){
         return yearService.saveYear(year);
+    }
+
+    // GET path = '/remove'
+    @RequestMapping(value = "/remove",method = RequestMethod.GET)
+    public Object remove(String yearId){
+        Map<String, Object> resutMap = Maps.newHashMap();
+        try {
+            yearService.removeYearById(Long.parseLong(yearId));
+            resutMap.put("removed", true);
+            resutMap.put("message", "删除年度报表成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            resutMap.put("removed", false);
+            resutMap.put("message", "YearController:remove异常");
+        }
+        return resutMap;
     }
 
 }

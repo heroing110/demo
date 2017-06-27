@@ -24,4 +24,6 @@ public interface SeasonService {
     public Season target_season(Season season, Season seasonBefore);
 
     public List<Season> findByParams(String industry, String year, String season, String cityId);
+
+    void removeSeasonById(long l);
 }

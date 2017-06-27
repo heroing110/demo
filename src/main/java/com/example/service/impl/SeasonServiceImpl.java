@@ -86,6 +86,11 @@ public class SeasonServiceImpl implements SeasonService {
     }
 
     @Override
+    public void removeSeasonById(long l) {
+        seasonRepository.removeSeasonById(l);
+    }
+
+    @Override
     public Season findSeasonById(Long id) {
         return seasonRepository.findSeasonById(id);
     }

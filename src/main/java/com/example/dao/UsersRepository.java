@@ -35,4 +35,12 @@ public interface UsersRepository extends JpaRepository<User,Long> ,JpaSpecificat
      * @return
      */
     public User findUserByUsername(String username);
+
+    /**
+     * 根据id不同，用户名相同查询
+     * @param id
+     * @param username
+     * @return
+     */
+    List<User> findUserByIdNotAndUsername(Long id,String username);
 }

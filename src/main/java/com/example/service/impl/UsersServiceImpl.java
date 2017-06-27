@@ -56,7 +56,7 @@ public class UsersServiceImpl implements UsersService {
             public Predicate toPredicate(Root<User> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
 
                 List<Predicate> predicates = new ArrayList<>();
-                if (!StringUtils.isEmpty(permission) && "1" == permission) {
+                if (!StringUtils.isEmpty(permission) && "1".equals(permission)) {
                     predicates.add(criteriaBuilder.equal(root.get("cityid"), cityId));
                 }
 
@@ -99,7 +99,8 @@ public class UsersServiceImpl implements UsersService {
     @Override
     public Object saveUser(User user) {
         Map<String, Object> resultMap = Maps.newHashMap();
-        if (null == user.getId() || 0 == user.getId()) {
+        Long id = user.getId();
+        if (null == user.getId() || new Long(0).equals(id)) {
             User resultUser = usersRepository.findUserByUsername(user.getUsername());
             if (resultUser != null) {
                 resultMap.put("message", "已存在相同登录名用户");
@@ -112,9 +113,15 @@ public class UsersServiceImpl implements UsersService {
                 }
             }
         } else {
-            usersRepository.save(user);
-            resultMap.put("updated", true);
-            resultMap.put("message", "修改用户成功");
+            List<User> userByIdNotAndUsername = usersRepository.findUserByIdNotAndUsername(id,user.getUsername());
+            if (userByIdNotAndUsername.size()>0) {
+                resultMap.put("message", "已存在相同登录名用户");
+                resultMap.put("updated", false);
+            }else{
+                usersRepository.save(user);
+                resultMap.put("updated", true);
+                resultMap.put("message", "修改用户成功");
+            }
         }
         return resultMap;
     }

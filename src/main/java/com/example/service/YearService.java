@@ -14,4 +14,6 @@ public interface YearService {
     public Year findYearById(Long id);
 
     public Object saveYear(Year year);
+
+    void removeYearById(long l);
 }

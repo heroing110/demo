@@ -24,7 +24,7 @@ public class SeasonController {
     public Object queryAll(String cityId,String userId,String permission,String companyName) {
         Map<String, Object> resutMap = Maps.newHashMap();
         resutMap.put("status", 1);
-        resutMap.put("message", "YearController:queryAll异常");
+        resutMap.put("message", "SeasonController:queryAll异常");
 
         try {
             return seasonService.findByCondition(cityId,userId,permission,companyName);
@@ -57,6 +57,23 @@ public class SeasonController {
     @RequestMapping(value = "/chart",method = RequestMethod.GET)
     public Object chart(String userId) {
         return seasonService.findSeasonsByUserId(Long.parseLong(userId));
+    }
+
+    // GET path = '/remove'
+    @RequestMapping(value = "/remove",method = RequestMethod.GET)
+    public Object remove(String seasonId){
+        Map<String, Object> resutMap = Maps.newHashMap();
+        try {
+            seasonService.removeSeasonById(Long.parseLong(seasonId));
+            resutMap.put("removed", true);
+            resutMap.put("message", "删除季度报表成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            resutMap.put("removed", false);
+            resutMap.put("message", "SeasonController:remove异常");
+        }
+        return resutMap;
+
     }
 
 }
