@@ -4,10 +4,7 @@ import com.example.bean.Season;
 import com.example.bean.Year;
 import com.example.service.SeasonService;
 import com.example.service.YearService;
-import com.example.util.DocumentHandler;
-import com.example.util.ExportExcelUtil;
-import com.example.util.MapUtil;
-import com.example.util.NumberUtils;
+import com.example.util.*;
 import com.google.common.collect.Maps;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,11 +47,11 @@ public class ExportExcelController {
 
             //导出Excel文件数据
             ExportExcelUtil util = new ExportExcelUtil();
-            File file = util.getExcelDemoFile("excel_template/season.xlsx");
-            String sheetName = "电子商务交易情况";
+            File file = util.getExcelDemoFile("excel_template/season.xls");
+            String sheetName = "季度";
             wb = util.writeNewExcel(file, sheetName, seasonList);
 
-            String fileName = "season_data.xlsx";
+            String fileName = "季度报表.xls";
             response.setContentType("application/vnd.ms-excel");
             response.setHeader("Content-disposition", "attachment;filename=" + new String( fileName.getBytes("gb2312"), "ISO8859-1" ) );
             os = response.getOutputStream();
@@ -80,6 +77,7 @@ public class ExportExcelController {
             resultMap.put("flag", true);
             //数据库取值
             Season season = seasonService.findSeasonById(Long.parseLong(seasonId));
+            season = DataUtil.computerSeason(season);
             //转换成map
             Map<String,Object> map = MapUtil.convertBean(season);
 
@@ -99,10 +97,11 @@ public class ExportExcelController {
         return resultMap;
     }
 
+
     @RequestMapping(value = "/downSeasonBefore", method = RequestMethod.GET)
-    public Object downSeasonBefore(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public Object downSeasonBefore(HttpServletRequest request, HttpServletResponse response , String seasonId) throws Exception {
         Map<String, Object> resultMap = Maps.newHashMap();
-        String seasonId = request.getParameter("seasonId");
+//        String seasonId = request.getParameter("seasonId");
         OutputStream os = null;
 
         try {
